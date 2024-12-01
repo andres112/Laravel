@@ -1,2 +1,6 @@
 <?php
-echo "Hello World!\n";
+
+$name = "John";
+$lastName = "Doe";
+
+echo "Hello $name $lastName!\n";
