@@ -1,6 +1,6 @@
 # commands to run this file:
 # docker build -t php-apache -f fundaments.Dockerfile .
-# docker run -d --name php-training -p 8080:80 -v ${pwd}/fundaments:/var/www/html php-apache
+# docker run -d --name php-training -p 8081:80 -v ${pwd}/fundaments:/var/www/html php-apache
 # docker exec -it php-training bash
 
 # Use the official PHP image with Apache
