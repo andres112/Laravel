@@ -83,7 +83,13 @@ for ($i = 5; $i > 0; $i--) {
 echo "************************************\n";
 echo "LOOP FOREACH...\n";
 
+echo "Labels and fruits\n";
 $fruits = ['apple' => "🍎", 'banana' => "🍌", 'cherry' => "🍒", 'orange' => "🍊", 'kiwi' => "🥝"];
 foreach ($fruits as $fruit => $emoji) {
     echo "$fruit: $emoji\n";
+}
+
+echo "Only fruits: \n";
+foreach ($fruits as $fruit) {
+    echo "$fruit \n";
 }
