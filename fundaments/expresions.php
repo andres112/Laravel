@@ -23,7 +23,7 @@ echo "DATA TYPES\n";
 $isStudent = 1;
 echo "var_dump(variable): \n";
 var_dump($isStudent, $isStudent == true, $isStudent === true); # var_dump shows the data type of the variable
- echo "\n";
+echo "\n";
 $scores = [10, '20', 5.55, (int)5.55];
 var_dump($scores, $scores[0], $scores[1], $scores[2], $scores[3], $scores[0] + $scores[1]);
 
@@ -41,7 +41,7 @@ if ($oddDay) {
 echo "************************************\n";
 echo "LOOP WHILE - DO...WHILE\n";
 
-$secret= "magic";
+$secret = "magic";
 $attempts = 0;
 $maxAttempts = 3;
 
@@ -78,4 +78,12 @@ for ($i = 5; $i > 0; $i--) {
     if ($i == 1) {
         echo "💥🚀\n";
     }
+}
+
+echo "************************************\n";
+echo "LOOP FOREACH...\n";
+
+$fruits = ['apple' => "🍎", 'banana' => "🍌", 'cherry' => "🍒", 'orange' => "🍊", 'kiwi' => "🥝"];
+foreach ($fruits as $fruit => $emoji) {
+    echo "$fruit: $emoji\n";
 }
