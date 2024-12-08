@@ -15,8 +15,7 @@ echo "I have $pizzas pizzas and $slices slices each, total slices: $totalSlices\
 
 // Set randomly true or false
 $isHungry = rand(0, 1) == 1;
-
-echo "Are you hungry? " . ($isHungry ? "Yes" : "No") . "\n";
+echo "Are you hungry? " . ($isHungry ? "Yes 👹" : "No 😊") . "\n";
 
 echo "************************************\n";
 echo "DATA TYPES\n";
@@ -57,5 +56,26 @@ while ($attempts < $maxAttempts) {
         echo "Sorry, you have reached the maximum number of attempts 🔒\n";
     } else {
         echo "Try again\n";
+    }
+}
+
+do {
+    $diceRoll = rand(1, 6);
+    echo "Dice roll: $diceRoll\n";
+    if ($diceRoll == 6) {
+        echo "Congratulations! You rolled a 6 🎲\n";
+        break;
+    }
+} while ($diceRoll != 6);
+
+echo "************************************\n";
+echo "LOOP FOR...\n";
+
+echo "Rocket launch in 5 seconds\n";
+for ($i = 5; $i > 0; $i--) {
+    echo "$i...\n";
+    sleep(1);
+    if ($i == 1) {
+        echo "💥🚀\n";
     }
 }
