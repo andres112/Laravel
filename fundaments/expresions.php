@@ -30,3 +30,12 @@ var_dump($scores, $scores[0], $scores[1], $scores[2], $scores[3], $scores[0] + $
 
 echo "************************************\n";
 echo "CONDITION IF STATEMENT\n";
+
+// Get the current day
+$oddDay = date('d') % 2 == 1;
+if ($oddDay) {
+    echo "Today is an odd day\n";
+} else {
+    echo "Today is an even day\n";
+}
+
