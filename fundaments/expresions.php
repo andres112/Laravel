@@ -39,3 +39,23 @@ if ($oddDay) {
     echo "Today is an even day\n";
 }
 
+echo "************************************\n";
+echo "LOOP WHILE - DO...WHILE\n";
+
+$secret= "magic";
+$attempts = 0;
+$maxAttempts = 3;
+
+while ($attempts < $maxAttempts) {
+    $attempts++;
+    echo "Attempt $attempts: ";
+    $guess = readline();
+    if ($guess == $secret) {
+        echo "Congratulations! You found the secret word 🪙\n";
+        break;
+    } elseif ($attempts == $maxAttempts) {
+        echo "Sorry, you have reached the maximum number of attempts 🔒\n";
+    } else {
+        echo "Try again\n";
+    }
+}
