@@ -83,13 +83,13 @@ for ($i = 5; $i > 0; $i--) {
 echo "************************************\n";
 echo "LOOP FOREACH...\n";
 
-echo "Labels and fruits\n";
+echo "Labels and fruits: both key value\n";
 $fruits = ['apple' => "🍎", 'banana' => "🍌", 'cherry' => "🍒", 'orange' => "🍊", 'kiwi' => "🥝"];
 foreach ($fruits as $fruit => $emoji) {
     echo "$fruit: $emoji\n";
 }
 
-echo "Only fruits: \n";
+echo "Only fruits: only the value \n";
 foreach ($fruits as $fruit) {
     echo "$fruit \n";
 }
@@ -107,12 +107,18 @@ switch ($fruits['banana']) {
     case "🍒":
         echo "Cherry\n";
         break;
-    case "🍊":
-        echo "Orange\n";
-        break;
-    case "🥝":
-        echo "Kiwi\n";
-        break;
     default:
-        echo "No fruit found\n";
+        echo "Maybe is another fruit\n";
 }
+
+echo "************************************\n";
+echo "MATCH EXPRESSION\n";
+
+$status = 404;
+$message = match ($status) {
+    200, 300 => "OK",
+    400, 404, 403 => "Not Found - Client Error",
+    500, 502, 503 => "Internal Server Error - Server Error",
+    default => "Unknown status code",
+};
+echo "Status: $status - $message\n";
