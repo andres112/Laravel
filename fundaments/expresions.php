@@ -93,3 +93,26 @@ echo "Only fruits: \n";
 foreach ($fruits as $fruit) {
     echo "$fruit \n";
 }
+
+echo "************************************\n";
+echo "SWITCH STATEMENT\n";
+
+switch ($fruits['banana']) {
+    case "🍎":
+        echo "Apple\n";
+        break;
+    case "🍌":
+        echo "Banana\n";
+        break;
+    case "🍒":
+        echo "Cherry\n";
+        break;
+    case "🍊":
+        echo "Orange\n";
+        break;
+    case "🥝":
+        echo "Kiwi\n";
+        break;
+    default:
+        echo "No fruit found\n";
+}
