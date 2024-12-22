@@ -112,7 +112,7 @@ switch ($fruits['banana']) {
 }
 
 echo "************************************\n";
-echo "MATCH EXPRESSION\n";
+echo "MATCH EXPRESSION, valid for PHP >= 8.0\n";
 
 $status = 404;
 $message = match ($status) {
@@ -122,3 +122,12 @@ $message = match ($status) {
     default => "Unknown status code",
 };
 echo "Status: $status - $message\n";
+
+echo "************************************\n";
+echo "REQUIRE/INCLUDE\n";
+
+include './require/config.php';
+echo "Database data: " . DB_HOST . ":" . DB_USER . "\n";
+
+require_once './checker.php';
+require './checker.php'; // this is ignored because the file was already included
