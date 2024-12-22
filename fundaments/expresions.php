@@ -131,3 +131,13 @@ echo "Database data: " . DB_HOST . ":" . DB_USER . "\n";
 
 require_once './checker.php';
 require './checker.php'; // this is ignored because the file was already included
+
+echo "************************************\n";
+echo "FUNCTIONS\n";
+
+function sayHello($name = "Guest"): void
+{
+    echo "Hello $name 😁!\n";
+}
+
+sayHello("Andres");
