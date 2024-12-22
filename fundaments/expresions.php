@@ -135,9 +135,10 @@ require './checker.php'; // this is ignored because the file was already include
 echo "************************************\n";
 echo "FUNCTIONS\n";
 
-function sayHello($name = "Guest"): void
+function sayHello($name = "Guest", $emoji = "👋"): void
 {
-    echo "Hello $name 😁!\n";
+    echo "Hello $name $emoji!\n";
 }
 
 sayHello("Andres");
+sayHello("John", "👨‍💻");
