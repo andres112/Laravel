@@ -142,3 +142,5 @@ function sayHello($name = "Guest", $emoji = "👋"): void
 
 sayHello("Andres");
 sayHello("John", "👨‍💻");
+
+include 'strict.php';
