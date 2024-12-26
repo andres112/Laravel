@@ -154,12 +154,13 @@ $greet = function ($name) {
 };
 echo $greet("World 🌍");
 
-$squares = function ($numbers) {
-    return array_map(
-        fn($number) =>
-        $number * $number,
-        $numbers
-    );
+$icons = ['🍎', '🍌', '🍒', '🍊', '🥝'];
+// with use we can pass variables to the anonymous function context
+$squares = function ($numbers) use ($icons) {
+    // return squared - icon
+    return array_map(function ($number) use ($icons) {
+        return $number * $number . " " . $icons[array_rand($icons)];
+    }, $numbers);
 };
 
-echo "Squares of numbers: " . implode(', ', $squares([1, 2, 3, 4, 5])) . "\n";
+echo "Squares of fruits: " . implode(', ', $squares([1, 2, 3, 4, 5])) . "\n";
