@@ -143,4 +143,5 @@ function sayHello($name = "Guest", $emoji = "👋"): void
 sayHello("Andres");
 sayHello("John", "👨‍💻");
 
+// Function with strict types
 include 'strict.php';
