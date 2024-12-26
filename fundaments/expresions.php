@@ -147,7 +147,7 @@ sayHello("John", "👨‍💻");
 include 'strict.php';
 
 echo "************************************\n";
-echo "ANONYMOUS FUNCTIONS\n";
+echo "ANONYMOUS FUNCTIONS - CLOSURES\n";
 
 $greet = function ($name) {
     return "Hello $name!\n";
@@ -164,3 +164,24 @@ $squares = function ($numbers) use ($icons) {
 };
 
 echo "Squares of fruits: " . implode(', ', $squares([1, 2, 3, 4, 5])) . "\n";
+
+echo "************************************\n";
+echo "REFERENCES\n";
+
+$person = "John";
+$otherPerson = &$person;
+echo "👨‍🦰 Person: $person, 👨 Other person: $otherPerson\n";
+$person = "Jane";
+echo "👩‍🦰 Person: $person, 👩 Other person: $otherPerson\n";
+$otherPerson = "Santa";
+echo "🎅 Person: $person, 🎅 Other person: $otherPerson\n";
+
+function doubleValue(int &$value): int //DANGER: This function modifies the original value
+{
+    $value *= 2;
+    return $value;
+}
+$originalValue = 10;
+echo "Original value: $originalValue, Double value: " . doubleValue($originalValue) . "\n";
+echo "Original value has been modified 😱: $originalValue\n";
+
