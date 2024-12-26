@@ -185,3 +185,6 @@ $originalValue = 10;
 echo "Original value: $originalValue, Double value: " . doubleValue($originalValue) . "\n";
 echo "Original value has been modified 😱: $originalValue\n";
 
+echo "************************************\n";
+echo "PERFORMANCE\n";
+include_once 'performance.php';
