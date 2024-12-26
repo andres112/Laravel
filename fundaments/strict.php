@@ -31,4 +31,5 @@ function introduceTeams(string $teamName,  string ...$players): void
     echo "Players: " . implode(', ', $players) . "\n";
 }
 
-introduceTeams('Real Madrid', 'Courtois', 'Carvajal', 'Varane', 'Ramos', 'Marcelo', 'Casemiro', 'Kroos', 'Modric', 'Benzema', 'Vinicius', 'Rodrygo');
+$realMadrid = ['Courtois', 'Carvajal', 'Varane', 'Ramos', 'Marcelo', 'Casemiro', 'Kroos', 'Modric', 'Benzema', 'Vinicius', 'Rodrygo'];
+introduceTeams('Real Madrid', ...$realMadrid);

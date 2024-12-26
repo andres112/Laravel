@@ -145,3 +145,21 @@ sayHello("John", "👨‍💻");
 
 // Function with strict types
 include 'strict.php';
+
+echo "************************************\n";
+echo "ANONYMOUS FUNCTIONS\n";
+
+$greet = function ($name) {
+    return "Hello $name!\n";
+};
+echo $greet("World 🌍");
+
+$squares = function ($numbers) {
+    return array_map(
+        fn($number) =>
+        $number * $number,
+        $numbers
+    );
+};
+
+echo "Squares of numbers: " . implode(', ', $squares([1, 2, 3, 4, 5])) . "\n";
