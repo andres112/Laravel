@@ -188,3 +188,16 @@ echo "Original value has been modified 😱: $originalValue\n";
 echo "************************************\n";
 echo "PERFORMANCE\n";
 include_once 'performance.php';
+
+echo "************************************\n";
+echo "VARIABLE SCOPE\n";
+
+$superhero = "Superman";
+
+function showSuperhero()
+{
+    global $superhero; // we can access the global variable using the global keyword
+    echo "Superhero: $superhero is Clark Kent\n";
+}
+
+showSuperhero();
