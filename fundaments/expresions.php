@@ -193,11 +193,13 @@ echo "************************************\n";
 echo "VARIABLE SCOPE\n";
 
 $superhero = "Superman";
+$antihero = "Lex Luthor";
 
-function showSuperhero()
+function showSuperhero($antihero)
 {
     global $superhero; // we can access the global variable using the global keyword
-    echo "Superhero: $superhero is Clark Kent\n";
+    echo "Global variable using global: $superhero is Clark Kent\n";
+    echo "Global variable using function parameters: $antihero is Lex Luthor\n";
 }
 
-showSuperhero();
+showSuperhero($antihero);
