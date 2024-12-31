@@ -7,7 +7,7 @@ $startTime = microtime(true);
 $startMemory = memory_get_usage();
 $startMemoryPeak = memory_get_peak_usage();
 
-$largeArray = range(1, 1_000_000); // the user of the _ is to make the number more readable
+$largeArray = range(1, 10_000_000); // the user of the _ is to make the number more readable
 
 $factorial = 0;
 
@@ -15,7 +15,7 @@ foreach  ($largeArray as $value) {
     $factorial += $value;
 }
 
-echo "The factorial of 1,000,000 is $factorial\n";
+echo "The factorial of 10,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();
@@ -46,11 +46,11 @@ function generateRange($start, $end) {
 
 $factorial = 0;
 
-foreach (generateRange(1, 1_000_000) as $value) {
+foreach (generateRange(1, 10_000_000) as $value) {
     $factorial += $value;
 }
 
-echo "The factorial of 1,000,000 is $factorial\n";
+echo "The factorial of 10,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();
