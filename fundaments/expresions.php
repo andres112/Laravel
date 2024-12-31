@@ -203,3 +203,13 @@ function showSuperhero($antihero)
 }
 
 showSuperhero($antihero);
+
+function countVisits()
+{
+    static $visits = 0; // static variables keep their value between function calls
+    $visits++;
+    echo "Visits: $visits\n";
+}
+countVisits();
+sleep(1);
+countVisits();
