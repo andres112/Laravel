@@ -193,7 +193,7 @@ echo "************************************\n";
 echo "VARIABLE SCOPE\n";
 
 $superhero = "Superman";
-$antihero = "Lex Luthor";
+$antihero = "Antihero";
 
 function showSuperhero($antihero)
 {
@@ -213,3 +213,18 @@ function countVisits()
 countVisits();
 sleep(1);
 countVisits();
+
+echo "************************************\n";
+echo "NULL in PHP 8.0\n";
+
+$variable = null;
+var_dump(
+    null,
+    null == false,
+    null == 0,
+    null == "",
+    null == [],
+    isset($variable),
+    empty($variable),
+    is_null($variable)
+);
