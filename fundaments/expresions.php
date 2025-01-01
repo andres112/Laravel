@@ -226,5 +226,6 @@ var_dump(
     null == [],
     isset($variable),
     empty($variable),
-    is_null($variable)
+    is_null($variable),
+    array_filter([1, null, [], "", false, 0, "0"])
 );
