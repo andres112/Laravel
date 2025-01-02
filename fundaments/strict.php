@@ -33,3 +33,19 @@ function introduceTeams(string $teamName,  string ...$players): void
 
 $realMadrid = ['Courtois', 'Carvajal', 'Varane', 'Ramos', 'Marcelo', 'Casemiro', 'Kroos', 'Modric', 'Benzema', 'Vinicius', 'Rodrygo'];
 introduceTeams('Real Madrid', ...$realMadrid);
+
+echo "************************************\n";
+echo "UNION TYPES\n";
+
+function identifyPayload(int|float|string $payload): string{
+    return match(true) {
+        is_int($payload) => "- Integer: " .  $payload * 2,
+        is_float($payload) => "- Float: " .  round($payload, 2),
+        is_string($payload) => "- String: " .  strtoupper($payload),
+        default => "Unknown payload"
+    };
+}
+
+echo identifyPayload(20) . "\n";
+echo identifyPayload(20.5365) . "\n";
+echo identifyPayload("twenty") . "\n";
