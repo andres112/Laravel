@@ -229,3 +229,16 @@ var_dump(
     is_null($variable),
     array_filter([1, null, [], "", false, 0, "0"])
 );
+
+echo "************************************\n";
+echo "NAMED ARGUMENTS in PHP 8.0\n";
+
+function orderPizza(string $flavor, string $size, array $toppings): void 
+{
+    echo "Ordering a $size $flavor pizza 🍕 with " . implode(', ', $toppings) . "\n";
+}
+
+// Positional arguments, the order matters
+orderPizza('Pepperoni', 'Large', ['Cheese', 'Pepperoni']);
+// Named arguments, the order does not matter
+orderPizza(size: 'Personal', toppings: ['Cheese', 'Pineapple', 'Salami'], flavor: 'Salami');
