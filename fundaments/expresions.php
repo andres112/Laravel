@@ -276,3 +276,8 @@ echo "❇️ Added by $addition: " . implode(', ', $addedNumbers) . "\n";
 // usort is a high order function that sorts an array using a custom comparison function
 usort($unsortedNumbers, fn($a, $b) => $b - $a);
 echo "🔻 Sorted descending: " . implode(', ', $unsortedNumbers) . "\n";
+
+// array_filter is a high order function that filters an array using a custom condition function
+$positiveNumbers = fn($number) => $number > 0;
+$filteredNumbers = array_filter($unsortedNumbers, $positiveNumbers);
+echo "✅ Positive numbers: " . implode(', ', $filteredNumbers) . "\n";
