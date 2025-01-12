@@ -293,8 +293,32 @@ function factorial(int $number): float
     return $number * factorial($number - 1);
 }
 
+echo "Factorial with recursion\n";
 echo "Factorial of 5: " . factorial(5) . "\n";
 echo "Factorial of 10: " . factorial(10) . "\n";
-echo "Factorial of 20: " . factorial(50) . "\n";
+echo "Factorial of 50: " . factorial(50) . "\n";
 
+$fibonacciCache = [1 => 1, 2 => 1];
+function fibonacci(int $number): int
+{
+    global $fibonacciCache;
+    if (array_key_exists($number, $fibonacciCache)) {
+        return $fibonacciCache[$number];
+    }
 
+    if ($number <= 1) {
+        return $number;
+    }
+    $fibonacciCache[$number] = fibonacci($number - 1) + fibonacci($number - 2);
+    return fibonacci($number - 1) + fibonacci($number - 2);
+}
+
+echo "Fibonacci with recursion\n";
+echo "Fibonacci of 5: " . fibonacci(5) . "\n";
+echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
+echo "Fibonacci of 10: " . fibonacci(10) . "\n";
+echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
+echo "Fibonacci of 20: " . fibonacci(20) . "\n";
+echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
+echo "Fibonacci of 50: " . fibonacci(50) . "\n";
+echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
