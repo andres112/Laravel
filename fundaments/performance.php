@@ -15,7 +15,7 @@ foreach  ($largeArray as $value) {
     $factorial += $value;
 }
 
-echo "The factorial of 10,000,000 is $factorial\n";
+echo "The summatory of 10,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();
@@ -50,7 +50,7 @@ foreach (generateRange(1, 10_000_000) as $value) {
     $factorial += $value;
 }
 
-echo "The factorial of 10,000,000 is $factorial\n";
+echo "The summatory 10,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();

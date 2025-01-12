@@ -281,3 +281,20 @@ echo "🔻 Sorted descending: " . implode(', ', $unsortedNumbers) . "\n";
 $positiveNumbers = fn($number) => $number > 0;
 $filteredNumbers = array_filter($unsortedNumbers, $positiveNumbers);
 echo "✅ Positive numbers: " . implode(', ', $filteredNumbers) . "\n";
+
+echo "************************************\n";
+echo "RECURSION\n";
+
+function factorial(int $number): float
+{
+    if ($number <= 1) {
+        return 1;
+    }
+    return $number * factorial($number - 1);
+}
+
+echo "Factorial of 5: " . factorial(5) . "\n";
+echo "Factorial of 10: " . factorial(10) . "\n";
+echo "Factorial of 20: " . factorial(50) . "\n";
+
+
