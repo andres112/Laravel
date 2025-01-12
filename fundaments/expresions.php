@@ -193,7 +193,7 @@ echo "************************************\n";
 echo "VARIABLE SCOPE\n";
 
 $superhero = "Superman";
-$antihero = "Antihero";
+$antihero = "Baldy";
 
 function showSuperhero($antihero)
 {
@@ -248,5 +248,31 @@ echo "ARROW FUNCTIONS\n";
 
 $numbers = [1, 2, 3, 4, 5];
 $multiplier = 2;
+
+// Arrow functions are a more concise way to write anonymous functions
 $multipliedNumbers = array_map(fn($number) => $number * $multiplier, $numbers);
 echo "Numbers: " . implode(', ', $numbers) . ", Multiplied by $multiplier: " . implode(', ', $multipliedNumbers) . "\n";
+
+echo "************************************\n";
+echo "HIGH ORDER FUNCTIONS\n";
+
+// High order functions receive a function as a parameter
+function apply(array $numbers, callable $operation): array
+{
+    return array_map($operation, $numbers);
+}
+
+$unsortedNumbers = [5, 3, 1, 4, 2, 6, -3, 0, -6];
+$multiplier = 2;
+$addition = 3;
+
+$multipliedNumbers = apply($unsortedNumbers, fn($number) => $number * $multiplier);
+$addedNumbers = apply($unsortedNumbers, fn($number) => $number + $addition);
+
+echo "Numbers: " . implode(', ', $unsortedNumbers) . "\n";
+echo "✴️ Multiplied by $multiplier: " . implode(', ', $multipliedNumbers) . "\n";
+echo "❇️ Added by $addition: " . implode(', ', $addedNumbers) . "\n";
+
+// usort is a high order function that sorts an array using a custom comparison function
+usort($unsortedNumbers, fn($a, $b) => $b - $a);
+echo "🔻 Sorted descending: " . implode(', ', $unsortedNumbers) . "\n";
