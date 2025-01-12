@@ -322,3 +322,18 @@ echo "Fibonacci of 20: " . fibonacci(20) . "\n";
 echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
 echo "Fibonacci of 50: " . fibonacci(50) . "\n";
 echo " Cached: " . implode(', ', $fibonacciCache) . "\n";
+
+echo "************************************\n";
+echo "GENERATORS\n";
+
+function contDown(int $start): Generator
+{
+    for ($i = $start; $i >= 0; $i--) {
+        yield $i;
+    }
+}
+
+echo "Countdown with generator\n";
+foreach (contDown(50) as $number) {
+    echo "$number... ";
+}
