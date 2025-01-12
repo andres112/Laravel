@@ -233,7 +233,7 @@ var_dump(
 echo "************************************\n";
 echo "NAMED ARGUMENTS in PHP 8.0\n";
 
-function orderPizza(string $flavor, string $size, array $toppings): void 
+function orderPizza(string $flavor, string $size, array $toppings): void
 {
     echo "Ordering a $size $flavor pizza 🍕 with " . implode(', ', $toppings) . "\n";
 }
@@ -242,3 +242,11 @@ function orderPizza(string $flavor, string $size, array $toppings): void
 orderPizza('Pepperoni', 'Large', ['Cheese', 'Pepperoni']);
 // Named arguments, the order does not matter
 orderPizza(size: 'Personal', toppings: ['Cheese', 'Pineapple', 'Salami'], flavor: 'Salami');
+
+echo "************************************\n";
+echo "ARROW FUNCTIONS\n";
+
+$numbers = [1, 2, 3, 4, 5];
+$multiplier = 2;
+$multipliedNumbers = array_map(fn($number) => $number * $multiplier, $numbers);
+echo "Numbers: " . implode(', ', $numbers) . ", Multiplied by $multiplier: " . implode(', ', $multipliedNumbers) . "\n";
