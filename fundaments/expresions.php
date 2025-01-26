@@ -343,12 +343,13 @@ echo "STRINGS\n";
 
 $longText = "This is a long text with many words";
 echo "Original text with double quote: $longText\n";
-echo 'Original text with single quote: $longText\n';
+echo 'Original text with single quote: $longText';
 
 $multilineText = <<<EOT
 This is a multiline text
 with many lines
+$longText
 EOT;
-echo "Multiline text:\n$multilineText\n";
+echo "\nMultiline text:\n$multilineText\n";
 
 
