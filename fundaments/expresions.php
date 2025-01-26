@@ -337,3 +337,18 @@ echo "Countdown with generator\n";
 foreach (contDown(50) as $number) {
     echo "$number... ";
 }
+
+echo "\n************************************\n";
+echo "STRINGS\n";
+
+$longText = "This is a long text with many words";
+echo "Original text with double quote: $longText\n";
+echo 'Original text with single quote: $longText\n';
+
+$multilineText = <<<EOT
+This is a multiline text
+with many lines
+EOT;
+echo "Multiline text:\n$multilineText\n";
+
+
