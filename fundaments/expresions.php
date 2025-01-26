@@ -352,4 +352,7 @@ $longText
 EOT;
 echo "\nMultiline text:\n$multilineText\n";
 
-
+echo "Substring: " . substr($longText, 10, 4) . "\n";
+echo "Uppercase: " . strtoupper($longText) . "\n";
+echo "Lowercase: " . strtolower($longText) . "\n";
+echo "First letter uppercase: " . ucfirst($longText) . "\n";
