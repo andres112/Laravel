@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+echo "\n\n===============strict.php===============\n";
 echo "************************************\n";
 echo "STRICT MODE FUNCTIONS\n";
 
@@ -14,7 +15,8 @@ echo 'The subtraction is =' . sub(1, 2) . "\n";
 // Following: Argument '2' passed to sum() is expected to be of type int, float given
 // echo sum(1.5, 2.5) . "\n";
 
-echo "=== Use of dynamic arguments ===\n";
+echo "************************************\n";
+echo " Use of dynamic arguments \n";
 function sum(int ...$values): int
 {
     return array_sum($values);
@@ -31,8 +33,8 @@ function introduceTeams(string $teamName,  string ...$players): void
     echo "Players: " . implode(', ', $players) . "\n";
 }
 
-$realMadrid = ['Courtois', 'Carvajal', 'Varane', 'Ramos', 'Marcelo', 'Casemiro', 'Kroos', 'Modric', 'Benzema', 'Vinicius', 'Rodrygo'];
-introduceTeams('Real Madrid', ...$realMadrid);
+$seleccionColombia = ['Ospina', 'Arias', 'Mina', 'Davinson', 'Cuadrado', 'Barrios', 'James', 'Duvan', 'Luis Diaz'];
+introduceTeams('Seleccion Colombia de Fútbol :', ...$seleccionColombia);
 
 echo "************************************\n";
 echo "UNION TYPES\n";

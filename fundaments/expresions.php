@@ -22,7 +22,8 @@ echo "DATA TYPES\n";
 
 $isStudent = 1;
 echo "var_dump(variable): \n";
-var_dump($isStudent, $isStudent == true, $isStudent === true); # var_dump shows the data type of the variable
+# var_dump shows the data type of the variable
+var_dump($isStudent, $isStudent == true, $isStudent === true);
 echo "\n";
 $scores = [10, '20', 5.55, (int)5.55];
 var_dump($scores, $scores[0], $scores[1], $scores[2], $scores[3], $scores[0] + $scores[1]);
@@ -43,7 +44,7 @@ echo "LOOP WHILE - DO...WHILE\n";
 
 $secret = "magic";
 $attempts = 0;
-$maxAttempts = 3;
+$maxAttempts = 5;
 
 while ($attempts < $maxAttempts) {
     $attempts++;
@@ -55,6 +56,9 @@ while ($attempts < $maxAttempts) {
     } elseif ($attempts == $maxAttempts) {
         echo "Sorry, you have reached the maximum number of attempts 🔒\n";
     } else {
+      if($attempts == 3){
+        echo "Hint: it's something related to fantasy stories\n";
+      }
         echo "Try again\n";
     }
 }
@@ -85,10 +89,12 @@ echo "LOOP FOREACH...\n";
 
 echo "Labels and fruits: both key value\n";
 $fruits = ['apple' => "🍎", 'banana' => "🍌", 'cherry' => "🍒", 'orange' => "🍊", 'kiwi' => "🥝"];
+# key => value
 foreach ($fruits as $fruit => $emoji) {
     echo "$fruit: $emoji\n";
 }
 
+# when we only need the value not required the => 
 echo "Only fruits: only the value \n";
 foreach ($fruits as $fruit) {
     echo "$fruit \n";
@@ -114,6 +120,7 @@ switch ($fruits['banana']) {
 echo "************************************\n";
 echo "MATCH EXPRESSION, valid for PHP >= 8.0\n";
 
+# match expression returns a value based on the parameter
 $status = 404;
 $message = match ($status) {
     200, 300 => "OK",
@@ -130,7 +137,7 @@ include './require/config.php';
 echo "Database data: " . DB_HOST . ":" . DB_USER . "\n";
 
 require_once './checker.php';
-require './checker.php'; // this is ignored because the file was already included
+require './checker.php';
 
 echo "************************************\n";
 echo "FUNCTIONS\n";
