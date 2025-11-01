@@ -156,13 +156,27 @@ include 'strict.php';
 echo "************************************\n";
 echo "ANONYMOUS FUNCTIONS - CLOSURES\n";
 
-$greet = function ($name) {
-    return "Hello $name!\n";
+// Anonymous function with closure, type hints, default values, and capturing external variables
+$taxRate = 0.18;
+$applyDiscountAndTax = function (float $amount, float $discount = 0.0) use ($taxRate): float {
+  $discounted = $amount - ($amount * $discount);
+  return $discounted + ($discounted * $taxRate);
 };
-echo $greet("World 🌍");
+
+$items = [
+  ['name' => 'Book', 'price' => 100, 'discount' => 0.10],
+  ['name' => 'Pen', 'price' => 10, 'discount' => 0.05],
+  ['name' => 'Bag', 'price' => 250, 'discount' => 0.15],
+];
+
+foreach ($items as $item) {
+  $finalPrice = $applyDiscountAndTax($item['price'], $item['discount']);
+  echo "{$item['name']} final price (after discount & tax): " . number_format($finalPrice, 2) . "\n";
+}
+echo "The total tax rate applied is " . ($taxRate * 100) . "%\n";
 
 $icons = ['🍎', '🍌', '🍒', '🍊', '🥝'];
-// with use we can pass variables to the anonymous function context
+// with "use" we can pass variables to the anonymous function context
 $squares = function ($numbers) use ($icons) {
     // return squared - icon
     return array_map(function ($number) use ($icons) {
@@ -177,13 +191,14 @@ echo "REFERENCES\n";
 
 $person = "John";
 $otherPerson = &$person;
-echo "👨‍🦰 Person: $person, 👨 Other person: $otherPerson\n";
+echo "👨 Person: $person, 👨 Other person: $otherPerson\n";
 $person = "Jane";
-echo "👩‍🦰 Person: $person, 👩 Other person: $otherPerson\n";
+echo "👩 Person: $person, 👩 Other person: $otherPerson\n";
 $otherPerson = "Santa";
 echo "🎅 Person: $person, 🎅 Other person: $otherPerson\n";
 
-function doubleValue(int &$value): int //DANGER: This function modifies the original value
+//DANGER: This function modifies the original value, because it is passed by reference with &
+function doubleValue(int &$value): int 
 {
     $value *= 2;
     return $value;
@@ -192,7 +207,7 @@ $originalValue = 10;
 echo "Original value: $originalValue, Double value: " . doubleValue($originalValue) . "\n";
 echo "Original value has been modified 😱: $originalValue\n";
 
-echo "************************************\n";
+echo "\n\n************************************\n";
 echo "PERFORMANCE\n";
 include_once 'performance.php';
 

@@ -1,8 +1,9 @@
 <?php
 
+# Enable strict mode. This enforces strict type checking for function arguments and return types.
 declare(strict_types=1);
 
-echo "\n\n===============strict.php===============\n";
+echo "===============strict.php===============\n";
 echo "************************************\n";
 echo "STRICT MODE FUNCTIONS\n";
 
@@ -51,3 +52,5 @@ function identifyPayload(int|float|string $payload): string{
 echo identifyPayload(20) . "\n";
 echo identifyPayload(20.5365) . "\n";
 echo identifyPayload("twenty") . "\n";
+
+echo "===============end strict.php===============\n";

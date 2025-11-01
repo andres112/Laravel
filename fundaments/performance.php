@@ -1,13 +1,15 @@
 <?php
 
+echo "\n\n===============performance.php===============\n";
+echo "************************************\n";
 // first increase the memory limit
-ini_set('memory_limit', '320M');
+ini_set('memory_limit', '1024M');
 
 $startTime = microtime(true);
 $startMemory = memory_get_usage();
 $startMemoryPeak = memory_get_peak_usage();
 
-$largeArray = range(1, 10_000_000); // the user of the _ is to make the number more readable
+$largeArray = range(1, 30_000_000); // the user of the _ is to make the number more readable
 
 $factorial = 0;
 
@@ -15,7 +17,7 @@ foreach  ($largeArray as $value) {
     $factorial += $value;
 }
 
-echo "The summatory of 10,000,000 is $factorial\n";
+echo "The summatory of 30,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();
@@ -46,11 +48,11 @@ function generateRange($start, $end) {
 
 $factorial = 0;
 
-foreach (generateRange(1, 10_000_000) as $value) {
+foreach (generateRange(1, 50_000_000) as $value) {
     $factorial += $value;
 }
 
-echo "The summatory 10,000,000 is $factorial\n";
+echo "The summatory 50,000,000 is $factorial\n";
 
 $endMemory = memory_get_usage();
 $endMemoryPeak = memory_get_peak_usage();
@@ -60,3 +62,4 @@ echo "+++ Without allocating memory for a large array\n";
 echo "Memory used: " . number_format(($endMemory - $startMemory) / 1024 / 1024, 2) . " MB\n";
 echo "Memory peak used: " . number_format(($endMemoryPeak - $startMemoryPeak) / 1024 / 1024, 2) . " MB\n";
 echo "Time taken: " . number_format($endTime - $startTime, 10) . " seconds\n";
+echo "===============end performance.php===============\n";
