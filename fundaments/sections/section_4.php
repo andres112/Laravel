@@ -32,7 +32,7 @@ for ($page = 1; $page <= $totalPages; $page++) {
     $startRecord = (($page - 1) * $recordsPerPage) + 1;
     $endRecord = min($page * $recordsPerPage, $totalRecords);
     
-    if ($page <= 5 || $page > $totalPages - 2) {
+    if ($page <= 3 || $page > $totalPages - 2) {
         echo "[$page]";
         if ($page == 3 && $totalPages > 7) {
             echo " ... ";
@@ -108,7 +108,7 @@ for ($i = 0; $i < $totalEmails; $i++) {
     $email = $emailList[$i];
     
     // Simulate sending (90% success rate)
-    $success = (rand(1, 10) <= 9);
+    $success = (rand(1, 10) <= 8);
     
     if ($success) {
         echo "✓ Sent to: $email\n";
@@ -154,7 +154,7 @@ for ($i = 1; $i <= $totalFiles; $i++) {
         $bar, $empty, (int)$progress, $i, $totalFiles);
     
     // Simulate file processing
-    usleep(50000); // 0.05 seconds
+    usleep(rand(30000, 500000)); // 0.03 to 0.5 seconds
 }
 
 echo "\n✓ All files processed successfully!\n\n";
@@ -163,17 +163,19 @@ echo "\n✓ All files processed successfully!\n\n";
 echo "5. Multiplication Table Generator\n";
 echo str_repeat("-", 50) . "\n";
 
-$tableSize = 5;
+$tableSize = 10;
 
 // Header
 echo "     ";
 for ($i = 1; $i <= $tableSize; $i++) {
+  // %4d means print integer in width of 4 it means ___1 __10
     printf("%4d", $i);
 }
 echo "\n" . str_repeat("-", ($tableSize + 1) * 4 + 5) . "\n";
 
 // Table rows
 for ($row = 1; $row <= $tableSize; $row++) {
+  // %2d | means print integer in width of 2 followed by " | "
     printf("%2d | ", $row);
     for ($col = 1; $col <= $tableSize; $col++) {
         printf("%4d", $row * $col);

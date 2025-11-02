@@ -64,7 +64,13 @@ foreach ($orderStatuses as $status) {
 echo "2. Role-Based Access Control\n";
 echo str_repeat("-", 50) . "\n";
 
-$userRole = 'editor';
+$userRole = match (random_int(1, 5)) {
+    1 => 'admin',
+    2 => 'editor',
+    3 => 'author',
+    4 => 'subscriber',
+    5 => 'guest',
+};
 $requestedAction = 'delete_post';
 
 echo "User Role: $userRole\n";
@@ -118,7 +124,12 @@ echo "\n";
 echo "3. Payment Gateway Routing\n";
 echo str_repeat("-", 50) . "\n";
 
-$paymentMethod = 'credit_card';
+$paymentMethod = match (random_int(1, 4)) {
+    1 => 'credit_card',
+    2 => 'paypal',
+    3 => 'bank_transfer',
+    4 => 'cryptocurrency',
+};
 $amount = 150.00;
 
 echo "Payment Method: $paymentMethod\n";
@@ -173,7 +184,16 @@ echo "\n";
 echo "4. HTTP Response Handler\n";
 echo str_repeat("-", 50) . "\n";
 
-$httpStatusCode = 404;
+$httpStatusCode = match (random_int(1, 8)) {
+    1 => 200,
+    2 => 201,
+    3 => 400,
+    4 => 401,
+    5 => 403,
+    6 => 404,
+    7 => 500,
+    8 => 503,
+};
 
 echo "HTTP Status Code: $httpStatusCode\n";
 
