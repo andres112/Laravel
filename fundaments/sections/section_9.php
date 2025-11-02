@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FUNCTIONS
  * 
@@ -23,32 +24,32 @@ echo str_repeat("-", 50) . "\n";
 
 function validateEmail(string $email): bool
 {
-    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+  return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
 function validatePassword(string $password): array
 {
-    $errors = [];
-    
-    if (strlen($password) < 8) {
-        $errors[] = "Password must be at least 8 characters";
-    }
-    if (!preg_match('/[A-Z]/', $password)) {
-        $errors[] = "Password must contain at least one uppercase letter";
-    }
-    if (!preg_match('/[a-z]/', $password)) {
-        $errors[] = "Password must contain at least one lowercase letter";
-    }
-    if (!preg_match('/[0-9]/', $password)) {
-        $errors[] = "Password must contain at least one number";
-    }
-    
-    return $errors;
+  $errors = [];
+
+  if (strlen($password) < 8) {
+    $errors[] = "Password must be at least 8 characters";
+  }
+  if (!preg_match('/[A-Z]/', $password)) {
+    $errors[] = "Password must contain at least one uppercase letter";
+  }
+  if (!preg_match('/[a-z]/', $password)) {
+    $errors[] = "Password must contain at least one lowercase letter";
+  }
+  if (!preg_match('/[0-9]/', $password)) {
+    $errors[] = "Password must contain at least one number";
+  }
+
+  return $errors;
 }
 
 function validateUsername(string $username): bool
 {
-    return preg_match('/^[a-zA-Z0-9_]{3,20}$/', $username) === 1;
+  return preg_match('/^[a-zA-Z0-9_]{3,20}$/', $username) === 1;
 }
 
 // Test validation functions
@@ -63,13 +64,13 @@ echo "  Valid: " . (validateEmail($testEmail) ? "✓ Yes" : "✗ No") . "\n\n";
 echo "Password: $testPassword\n";
 $passwordErrors = validatePassword($testPassword);
 if (empty($passwordErrors)) {
-    echo "  Valid: ✓ Yes\n\n";
+  echo "  Valid: ✓ Yes\n\n";
 } else {
-    echo "  Valid: ✗ No\n";
-    foreach ($passwordErrors as $error) {
-        echo "    - $error\n";
-    }
-    echo "\n";
+  echo "  Valid: ✗ No\n";
+  foreach ($passwordErrors as $error) {
+    echo "    - $error\n";
+  }
+  echo "\n";
 }
 
 echo "Username: $testUsername\n";
@@ -81,39 +82,39 @@ echo str_repeat("-", 50) . "\n";
 
 function calculateSubtotal(array $items): float
 {
-    $subtotal = 0;
-    foreach ($items as $item) {
-        $subtotal += $item['price'] * $item['quantity'];
-    }
-    return $subtotal;
+  $subtotal = 0;
+  foreach ($items as $item) {
+    $subtotal += $item['price'] * $item['quantity'];
+  }
+  return $subtotal;
 }
 
 function calculateTax(float $amount, float $rate = 0.18): float
 {
-    return $amount * $rate;
+  return $amount * $rate;
 }
 
 function applyDiscount(float $amount, float $discountPercent): float
 {
-    return $amount * (1 - $discountPercent / 100);
+  return $amount * (1 - $discountPercent / 100);
 }
 
 function formatPrice(float $price, string $currency = 'USD'): string
 {
-    $symbol = match ($currency) {
-        'USD' => '$',
-        'EUR' => '€',
-        'GBP' => '£',
-        default => '$'
-    };
-    
-    return $symbol . number_format($price, 2);
+  $symbol = match ($currency) {
+    'USD' => '$',
+    'EUR' => '€',
+    'GBP' => '£',
+    default => '$'
+  };
+
+  return $symbol . number_format($price, 2);
 }
 
 // Test price functions
 $cartItems = [
-    ['name' => 'Laptop', 'price' => 999.99, 'quantity' => 1],
-    ['name' => 'Mouse', 'price' => 29.99, 'quantity' => 2],
+  ['name' => 'Laptop', 'price' => 999.99, 'quantity' => 1],
+  ['name' => 'Mouse', 'price' => 29.99, 'quantity' => 2],
 ];
 
 $subtotal = calculateSubtotal($cartItems);
@@ -133,38 +134,38 @@ echo str_repeat("-", 50) . "\n";
 
 function formatDate(string $date, string $format = 'Y-m-d'): string
 {
-    return date($format, strtotime($date));
+  return date($format, strtotime($date));
 }
 
 function getTimeDifference(string $datetime): string
 {
-    $now = time();
-    $timestamp = strtotime($datetime);
-    $diff = $now - $timestamp;
-    
-    if ($diff < 60) {
-        return "just now";
-    } elseif ($diff < 3600) {
-        $minutes = floor($diff / 60);
-        return "$minutes minute" . ($minutes > 1 ? 's' : '') . " ago";
-    } elseif ($diff < 86400) {
-        $hours = floor($diff / 3600);
-        return "$hours hour" . ($hours > 1 ? 's' : '') . " ago";
-    } else {
-        $days = floor($diff / 86400);
-        return "$days day" . ($days > 1 ? 's' : '') . " ago";
-    }
+  $now = time();
+  $timestamp = strtotime($datetime);
+  $diff = $now - $timestamp;
+
+  if ($diff < 60) {
+    return "just now";
+  } elseif ($diff < 3600) {
+    $minutes = floor($diff / 60);
+    return "$minutes minute" . ($minutes > 1 ? 's' : '') . " ago";
+  } elseif ($diff < 86400) {
+    $hours = floor($diff / 3600);
+    return "$hours hour" . ($hours > 1 ? 's' : '') . " ago";
+  } else {
+    $days = floor($diff / 86400);
+    return "$days day" . ($days > 1 ? 's' : '') . " ago";
+  }
 }
 
 function isBusinessDay(string $date): bool
 {
-    $dayOfWeek = date('N', strtotime($date));
-    return $dayOfWeek < 6; // Monday = 1, Sunday = 7
+  $dayOfWeek = date('N', strtotime($date));
+  return $dayOfWeek < 6; // Monday = 1, Sunday = 7
 }
 
 // Test date functions
-$postDate = date('Y-m-d H:i:s', strtotime('-2 hours'));
-$meetingDate = '2024-12-25';
+$postDate = date('Y-m-d H:i:s', strtotime('- hours'));
+$meetingDate = date('Y-m-d');
 
 echo "Post published: " . formatDate($postDate, 'F j, Y g:i A') . "\n";
 echo "  Time ago: " . getTimeDifference($postDate) . "\n\n";
@@ -178,36 +179,36 @@ echo str_repeat("-", 50) . "\n";
 
 function slugify(string $text): string
 {
-    $text = strtolower($text);
-    $text = preg_replace('/[^a-z0-9]+/', '-', $text);
-    return trim($text, '-');
+  $text = strtolower($text);
+  $text = preg_replace('/[^a-z0-9]+/', '-', $text);
+  return trim($text, '-');
 }
 
 function truncate(string $text, int $length = 100, string $suffix = '...'): string
 {
-    if (strlen($text) <= $length) {
-        return $text;
-    }
-    return substr($text, 0, $length) . $suffix;
+  if (strlen($text) <= $length) {
+    return $text;
+  }
+  return substr($text, 0, $length) . $suffix;
 }
 
 function maskEmail(string $email): string
 {
-    $parts = explode('@', $email);
-    if (count($parts) !== 2) {
-        return $email;
-    }
-    
-    $name = $parts[0];
-    $domain = $parts[1];
-    $nameLength = strlen($name);
-    
-    if ($nameLength <= 2) {
-        return str_repeat('*', $nameLength) . '@' . $domain;
-    }
-    
-    $masked = $name[0] . str_repeat('*', $nameLength - 2) . $name[$nameLength - 1];
-    return $masked . '@' . $domain;
+  $parts = explode('@', $email);
+  if (count($parts) !== 2) {
+    return $email;
+  }
+
+  $name = $parts[0];
+  $domain = $parts[1];
+  $nameLength = strlen($name);
+
+  if ($nameLength <= 2) {
+    return str_repeat('*', $nameLength) . '@' . $domain;
+  }
+
+  $masked = $name[0] . str_repeat('*', $nameLength - 2) . $name[$nameLength - 1];
+  return $masked . '@' . $domain;
 }
 
 // Test string functions
@@ -229,26 +230,26 @@ echo str_repeat("-", 50) . "\n";
 
 function sum(...$numbers): float
 {
-    return array_sum($numbers);
+  return array_sum($numbers);
 }
 
 function average(...$numbers): float
 {
-    if (empty($numbers)) {
-        return 0;
-    }
-    return array_sum($numbers) / count($numbers);
+  if (empty($numbers)) {
+    return 0;
+  }
+  return array_sum($numbers) / count($numbers);
 }
 
 function logMessage(string $level, string $message, ...$context): void
 {
-    $timestamp = date('Y-m-d H:i:s');
-    echo "[$timestamp] $level: $message";
-    
-    if (!empty($context)) {
-        echo " | Context: " . json_encode($context);
-    }
-    echo "\n";
+  $timestamp = date('Y-m-d H:i:s');
+  echo "[$timestamp] $level: $message";
+
+  if (!empty($context)) {
+    echo " | Context: " . json_encode($context);
+  }
+  echo "\n";
 }
 
 // Test variadic functions
@@ -265,7 +266,7 @@ echo "   reliability. Keep functions small and focused on a single task.\n";
 
 // Function with strict types demonstration
 if (file_exists(__DIR__ . '/../strict.php')) {
-    echo "\n" . str_repeat("=", 50) . "\n";
-    echo "Strict Types Example:\n";
-    include __DIR__ . '/../strict.php';
+  echo "\n" . str_repeat("=", 50) . "\n";
+  echo "Strict Types Example:\n";
+  include __DIR__ . '/../strict.php';
 }

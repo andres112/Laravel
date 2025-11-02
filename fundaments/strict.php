@@ -9,7 +9,7 @@ echo "STRICT MODE FUNCTIONS\n";
 
 function sub(int $a, int $b): int
 {
-    return $a - $b;
+  return $a - $b;
 }
 
 echo 'The subtraction is =' . sub(1, 2) . "\n";
@@ -18,20 +18,20 @@ echo 'The subtraction is =' . sub(1, 2) . "\n";
 
 echo "************************************\n";
 echo " Use of dynamic arguments \n";
-function sum(int ...$values): int
+function suma(int ...$values): int
 {
-    return array_sum($values);
+  return array_sum($values);
 }
 
-echo 'The sum is =' . sum(1, 2, 3, 4, 5) . "\n";
+echo 'The sum is =' . suma(1, 2, 3, 4, 5) . "\n";
 
 function introduceTeams(string $teamName,  string ...$players): void
 {
-    $players = array_map(function($player) {
-        return "⚽ " . $player;
-    }, $players);
-    echo "Team: $teamName\n";
-    echo "Players: " . implode(', ', $players) . "\n";
+  $players = array_map(function ($player) {
+    return "⚽ " . $player;
+  }, $players);
+  echo "Team: $teamName\n";
+  echo "Players: " . implode(', ', $players) . "\n";
 }
 
 $seleccionColombia = ['Ospina', 'Arias', 'Mina', 'Davinson', 'Cuadrado', 'Barrios', 'James', 'Duvan', 'Luis Diaz'];
@@ -40,13 +40,14 @@ introduceTeams('Seleccion Colombia de Fútbol :', ...$seleccionColombia);
 echo "************************************\n";
 echo "UNION TYPES\n";
 
-function identifyPayload(int|float|string $payload): string{
-    return match(true) {
-        is_int($payload) => "- Integer: " .  $payload * 2,
-        is_float($payload) => "- Float: " .  round($payload, 2),
-        is_string($payload) => "- String: " .  strtoupper($payload),
-        default => "Unknown payload"
-    };
+function identifyPayload(int|float|string $payload): string
+{
+  return match (true) {
+    is_int($payload) => "- Integer: " .  $payload * 2,
+    is_float($payload) => "- Float: " .  round($payload, 2),
+    is_string($payload) => "- String: " .  strtoupper($payload),
+    default => "Unknown payload"
+  };
 }
 
 echo identifyPayload(20) . "\n";
