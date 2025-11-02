@@ -235,6 +235,7 @@ function countVisits()
 countVisits();
 sleep(1);
 countVisits();
+countVisits();
 
 echo "************************************\n";
 echo "NULL in PHP 8.0\n";
@@ -295,14 +296,72 @@ echo "Numbers: " . implode(', ', $unsortedNumbers) . "\n";
 echo "✴️ Multiplied by $multiplier: " . implode(', ', $multipliedNumbers) . "\n";
 echo "❇️ Added by $addition: " . implode(', ', $addedNumbers) . "\n";
 
-// usort is a high order function that sorts an array using a custom comparison function
-usort($unsortedNumbers, fn($a, $b) => $b - $a);
-echo "🔻 Sorted descending: " . implode(', ', $unsortedNumbers) . "\n";
+// --------------------------------------------------
+// Higher-order array functions showcase
+// --------------------------------------------------
 
-// array_filter is a high order function that filters an array using a custom condition function
-$positiveNumbers = fn($number) => $number > 0;
-$filteredNumbers = array_filter($unsortedNumbers, $positiveNumbers);
-echo "✅ Positive numbers: " . implode(', ', $filteredNumbers) . "\n";
+// 1. array_map — transform
+$doubled = array_map(fn($x) => $x * 2, $unsortedNumbers);
+echo "array_map → Doubled: " . implode(', ', $doubled) . "\n";
+
+// 2. array_filter — select
+$positives = array_filter($unsortedNumbers, fn($x) => $x > 0);
+echo "array_filter → Positive numbers: " . implode(', ', $positives) . "\n";
+
+// 3. array_reduce — fold into a single value
+$sum = array_reduce($unsortedNumbers, fn($carry, $x) => $carry + $x, 0);
+echo "array_reduce → Sum of all numbers: $sum\n";
+
+// 4. array_walk — in-place transformation (modifies original array)
+$temp = $unsortedNumbers;
+array_walk($temp, fn(&$x) => $x *= 10);
+echo "array_walk → Each element x10: " . implode(', ', $temp) . "\n";
+
+// 5. array_walk_recursive — works with nested arrays
+$nested = [1, [2, 3], [4, [5, 6]]];
+array_walk_recursive($nested, fn(&$x) => $x += 5);
+echo "array_walk_recursive → Incremented nested: " . json_encode($nested) . "\n";
+
+// 6. usort — sort values with a comparator
+$temp = $unsortedNumbers;
+usort($temp, fn($a, $b) => $a <=> $b); // ascending
+// <=> operator returns -1, 0, 1 for less than, equal, greater than
+echo "usort → Sorted ascending: " . implode(', ', $temp) . "\n";
+
+// 7. uasort — same but preserves keys
+$temp = array_combine(range('a', 'i'), $unsortedNumbers);
+uasort($temp, fn($a, $b) => abs($a) <=> abs($b)); // sort by absolute value
+echo "uasort → Sorted by absolute value (keys preserved): " . json_encode($temp) . "\n";
+
+// 8. uksort — sort by custom key rule
+$temp = [
+    'banana' => 3,
+    'apple' => 5,
+    'pineapple' => 2
+];
+uksort($temp, fn($a, $b) => strlen($a) <=> strlen($b));
+echo "uksort → Sorted by key length: " . json_encode($temp) . "\n";
+
+// 9. array_udiff — custom comparison difference
+$a1 = [1, 2, 3, 4];
+$a2 = [3, 4, 5];
+$diff = array_udiff($a1, $a2, fn($a, $b) => $a <=> $b);
+echo "array_udiff → Values in a1 not in a2: " . implode(', ', $diff) . "\n";
+
+// 10. array_uintersect — custom comparison intersection
+$inter = array_uintersect($a1, $a2, fn($a, $b) => $a <=> $b);
+echo "array_uintersect → Values shared by both arrays: " . implode(', ', $inter) . "\n";
+
+// 11. array_uintersect_assoc — intersection considering keys and values
+$a1 = ['x' => 1, 'y' => 2, 'z' => 3];
+$a2 = ['y' => 2, 'z' => 4];
+$interAssoc = array_uintersect_assoc($a1, $a2, fn($a, $b) => $a <=> $b);
+echo "array_uintersect_assoc → Matching key/value pairs: " . json_encode($interAssoc) . "\n";
+
+// 12. array_udiff_assoc — difference considering both key and value
+$diffAssoc = array_udiff_assoc($a1, $a2, fn($a, $b) => $a <=> $b);
+echo "array_udiff_assoc → Non-matching key/value pairs: " . json_encode($diffAssoc) . "\n";
+
 
 echo "************************************\n";
 echo "RECURSION\n";
@@ -370,6 +429,8 @@ echo 'Original text with single quote: $longText';
 $multilineText = <<<EOT
 This is a multiline text
 with many lines
+and it preserves the formatting of
+the multiple lines including  variables like
 $longText
 EOT;
 echo "\nMultiline text:\n$multilineText\n";
