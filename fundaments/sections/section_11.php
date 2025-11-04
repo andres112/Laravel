@@ -63,13 +63,10 @@ echo "\nApplying 10% discount (using reference):\n";
 foreach ($products as &$product) {
     $product['discount'] = 10;
     $product['price'] = $product['price'] * 0.90;
-}
-unset($product); // Important: break the reference!
-
-foreach ($products as $product) {
     echo "  {$product['name']}: $" . number_format($product['price'], 2) . 
          " ({$product['discount']}% off)\n";
 }
+unset($product); // Important: break the reference!
 
 echo "\n⚠️  Always unset the reference variable after foreach loop!\n\n";
 

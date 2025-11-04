@@ -298,7 +298,7 @@ $validators = [
 
 $testData = [
     'email' => 'user@example.com',
-    'password' => 'secure123',
+    'password' => '1245',
     'age' => 25,
     'username' => 'john_doe_2024',
 ];
