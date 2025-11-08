@@ -34,16 +34,17 @@ $values = [
 ];
 
 echo "Value comparison table:\n\n";
-printf("%-15s | %-8s | %-8s | %-8s | %-8s\n", "Value", "is_null", "empty", "isset", "== false");
-echo str_repeat("-", 65) . "\n";
+printf("%-15s | %-8s | %-8s | %-8s | %-8s | %-8s\n", "Value", "is_null", "empty", "isset", "== false", "=== null");
+echo str_repeat("-", 80) . "\n";
 
 foreach ($values as $name => $value) {
-    printf("%-15s | %-8s | %-8s | %-8s | %-8s\n",
+    printf("%-15s | %-8s | %-8s | %-8s | %-8s | %-8s\n",
         $name,
         is_null($value) ? "true" : "false",
         empty($value) ? "true" : "false",
         isset($value) ? "true" : "false",
-        ($value == false) ? "true" : "false"
+        ($value == false) ? "true" : "false",
+        ($value === null) ? "true" : "false"
     );
 }
 
