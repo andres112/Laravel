@@ -68,8 +68,8 @@ for ($i = 0; $i < 100; $i++) {
 $time1 = microtime(true) - $start;
 
 // Method 2: isset with array flip (hash lookup)
-$flipped = array_flip($largeArray);
 $start = microtime(true);
+$flipped = array_flip($largeArray);
 for ($i = 0; $i < 100; $i++) {
     $found = isset($flipped[$searchValue]);
 }
@@ -217,28 +217,32 @@ $cache = [];
 
 function getCachedResult($input) {
     global $cache;
-    
-    if (!isset($cache[$input])) {
+    $strInput = (string)$input;
+    if (!isset($cache[$strInput])) {
         echo "  [MISS] Computing result for $input...\n";
-        $cache[$input] = expensiveCalculation($input);
+        $cache[$strInput] = expensiveCalculation($input);
     } else {
         echo "  [HIT] Using cached result for $input\n";
     }
-    
-    return $cache[$input];
+
+    return $cache[$strInput];
 }
 
 echo "Caching demonstration:\n";
 $start = microtime(true);
 $result1 = getCachedResult(5);
 $result2 = getCachedResult(10);
-$result3 = getCachedResult(5);  // Cached!
-$result4 = getCachedResult(10); // Cached!
+$result3 = getCachedResult(1936.57);
 $time = microtime(true) - $start;
+$startCache = microtime(true);  
+$result4 = getCachedResult(5);  // Cached!
+$result5 = getCachedResult(10); // Cached!
+$result6 = getCachedResult(1936.57); // Cached!
+$timeCache = microtime(true) - $startCache;
 
-echo "\nTotal time: " . number_format($time * 1000, 2) . " ms\n";
-echo "Without cache: ~40ms\n";
-echo "With cache: ~" . number_format($time * 1000, 2) . " ms\n\n";
+echo "\nTotal time: " . number_format(($time + $timeCache) * 1000, 2) . " ms\n";
+echo "Without cache: " . number_format($time * 1000, 2) . " ms\n";
+echo "With cache: ~" . number_format($timeCache * 1000, 2) . " ms\n\n";
 
 // Performance tips summary
 echo "8. Performance Best Practices\n";
