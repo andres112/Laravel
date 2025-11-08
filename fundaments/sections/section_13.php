@@ -218,7 +218,7 @@ echo "  Result: {$user1Again['name']} ({$user1Again['email']})\n\n";
 echo "7. Rate Limiting Implementation\n";
 echo str_repeat("-", 50) . "\n";
 
-function checkRateLimit($clientId, $maxRequests = 3, $window = 60) {
+function checkRateLimit($clientId, $maxRequests = 3, $window = 30) {
     static $requests = [];
     
     $now = time();
@@ -252,12 +252,13 @@ function checkRateLimit($clientId, $maxRequests = 3, $window = 60) {
     return true;
 }
 
-echo "Testing rate limiting (3 requests per 60 seconds):\n\n";
+echo "Testing rate limiting (3 requests per 30 seconds):\n\n";
 
 for ($i = 1; $i <= 5; $i++) {
     echo "Request #$i:\n";
     checkRateLimit('client-123');
     echo "\n";
+    usleep(9*1000000); // 9 second delay between requests
 }
 
 // Real-world example: Scope resolution
