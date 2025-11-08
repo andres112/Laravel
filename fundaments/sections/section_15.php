@@ -1,4 +1,5 @@
 <?php
+
 /**
  * NAMED ARGUMENTS (PHP 8.0+)
  * 
@@ -22,32 +23,32 @@ echo "1. Database Query Builder\n";
 echo str_repeat("-", 50) . "\n";
 
 function buildQuery(
-    string $table,
-    array $columns = ['*'],
-    ?string $where = null,
-    ?string $orderBy = null,
-    ?int $limit = null,
-    int $offset = 0
+  string $table,
+  array $columns = ['*'],
+  ?string $where = null,
+  ?string $orderBy = null,
+  ?int $limit = null,
+  int $offset = 0
 ): string {
-    $sql = "SELECT " . implode(', ', $columns) . " FROM $table";
-    
-    if ($where) {
-        $sql .= " WHERE $where";
-    }
-    
-    if ($orderBy) {
-        $sql .= " ORDER BY $orderBy";
-    }
-    
-    if ($limit) {
-        $sql .= " LIMIT $limit";
-    }
-    
-    if ($offset > 0) {
-        $sql .= " OFFSET $offset";
-    }
-    
-    return $sql . ";";
+  $sql = "SELECT " . implode(', ', $columns) . " FROM $table";
+
+  if ($where) {
+    $sql .= " WHERE $where";
+  }
+
+  if ($orderBy) {
+    $sql .= " ORDER BY $orderBy";
+  }
+
+  if ($limit) {
+    $sql .= " LIMIT $limit";
+  }
+
+  if ($offset > 0) {
+    $sql .= " OFFSET $offset";
+  }
+
+  return $sql . ";";
 }
 
 // Old way: Must pass all parameters in order
@@ -57,19 +58,19 @@ echo "  $query1\n\n";
 
 // New way: Named arguments (cleaner and clearer)
 $query2 = buildQuery(
-    table: 'users',
-    columns: ['id', 'name', 'email'],
-    orderBy: 'created_at DESC',
-    limit: 20
+  table: 'users',
+  columns: ['id', 'name', 'email'],
+  orderBy: 'created_at DESC',
+  limit: 20
 );
 echo "Named arguments (new way):\n";
 echo "  $query2\n\n";
 
 // Can skip optional parameters easily
 $query3 = buildQuery(
-    table: 'products',
-    where: 'price > 100',
-    limit: 5
+  table: 'products',
+  where: 'price > 100',
+  limit: 5
 );
 echo "Skipping optional parameters:\n";
 echo "  $query3\n\n";
@@ -79,34 +80,34 @@ echo "2. Email Configuration\n";
 echo str_repeat("-", 50) . "\n";
 
 function sendEmail(
-    string $to,
-    string $subject,
-    string $body,
-    ?string $from = 'noreply@example.com',
-    array $cc = [],
-    array $bcc = [],
-    bool $isHtml = false,
-    int $priority = 3,
-    array $attachments = []
+  string $to,
+  string $subject,
+  string $body,
+  ?string $from = 'noreply@example.com',
+  array $cc = [],
+  array $bcc = [],
+  bool $isHtml = false,
+  int $priority = 3,
+  array $attachments = []
 ): array {
-    return [
-        'to' => $to,
-        'subject' => $subject,
-        'from' => $from,
-        'cc' => $cc,
-        'bcc' => $bcc,
-        'html' => $isHtml,
-        'priority' => $priority,
-        'attachments' => count($attachments),
-        'status' => 'queued'
-    ];
+  return [
+    'to' => $to,
+    'subject' => $subject,
+    'from' => $from,
+    'cc' => $cc,
+    'bcc' => $bcc,
+    'html' => $isHtml,
+    'priority' => $priority,
+    'attachments' => count($attachments),
+    'status' => 'queued'
+  ];
 }
 
 // Simple email
 $email1 = sendEmail(
-    to: 'user@example.com',
-    subject: 'Welcome!',
-    body: 'Thank you for signing up.'
+  to: 'user@example.com',
+  subject: 'Welcome!',
+  body: 'Thank you for signing up.'
 );
 
 echo "Simple email:\n";
@@ -117,14 +118,14 @@ echo "  Status: {$email1['status']}\n\n";
 
 // Complex email with many options
 $email2 = sendEmail(
-    to: 'customer@example.com',
-    subject: 'Order Confirmation',
-    body: '<h1>Your order has been received</h1>',
-    from: 'orders@shop.com',
-    cc: ['manager@shop.com'],
-    isHtml: true,
-    priority: 1,
-    attachments: ['invoice.pdf', 'receipt.pdf']
+  to: 'customer@example.com',
+  subject: 'Order Confirmation',
+  body: '<h1>Your order has been received</h1>',
+  from: 'orders@shop.com',
+  cc: ['manager@shop.com'],
+  isHtml: true,
+  priority: 1,
+  attachments: ['invoice.pdf', 'receipt.pdf']
 );
 
 echo "Complex email:\n";
@@ -141,62 +142,62 @@ echo "  Status: {$email2['status']}\n\n";
 echo "3. Flexible Logger\n";
 echo str_repeat("-", 50) . "\n";
 
-function log(
-    string $message,
-    string $level = 'info',
-    string $channel = 'app',
-    array $context = [],
-    bool $sendToSlack = false,
-    bool $sendEmail = false
+function customLog(
+  string $message,
+  string $level = 'info',
+  string $channel = 'app',
+  array $context = [],
+  bool $sendToSlack = false,
+  bool $sendEmail = false
 ): void {
-    $timestamp = date('Y-m-d H:i:s');
-    $levelEmoji = match($level) {
-        'error' => '❌',
-        'warning' => '⚠️',
-        'info' => 'ℹ️',
-        'debug' => '🐛',
-        default => '📝'
-    };
-    
-    echo "[$timestamp] $levelEmoji [$channel] $level: $message\n";
-    
-    if (!empty($context)) {
-        echo "  Context: " . json_encode($context) . "\n";
-    }
-    
-    if ($sendToSlack) {
-        echo "  📱 Sent to Slack\n";
-    }
-    
-    if ($sendEmail) {
-        echo "  📧 Sent via email\n";
-    }
+  $timestamp = date('Y-m-d H:i:s');
+  $levelEmoji = match ($level) {
+    'error' => '❌',
+    'warning' => '⚠️',
+    'info' => 'ℹ️',
+    'debug' => '🐛',
+    default => '📝'
+  };
+
+  echo "[$timestamp] $levelEmoji [$channel] $level: $message\n";
+
+  if (!empty($context)) {
+    echo "  Context: " . json_encode($context) . "\n";
+  }
+
+  if ($sendToSlack) {
+    echo "  📱 Sent to Slack\n";
+  }
+
+  if ($sendEmail) {
+    echo "  📧 Sent via email\n";
+  }
 }
 
 echo "Logging examples:\n\n";
 
 // Simple log
-log(message: 'User logged in');
+customLog(message: 'User logged in');
 
 echo "\n";
 
 // Warning with context
-log(
-    message: 'High memory usage detected',
-    level: 'warning',
-    context: ['memory' => '512MB', 'threshold' => '400MB']
+customLog(
+  message: 'High memory usage detected',
+  level: 'warning',
+  context: ['memory' => '512MB', 'threshold' => '400MB']
 );
 
 echo "\n";
 
 // Critical error with notifications
-log(
-    message: 'Database connection failed',
-    level: 'error',
-    channel: 'database',
-    context: ['host' => 'localhost', 'error' => 'timeout'],
-    sendToSlack: true,
-    sendEmail: true
+customLog(
+  message: 'Database connection failed',
+  level: 'error',
+  channel: 'database',
+  context: ['host' => 'localhost', 'error' => 'timeout'],
+  sendToSlack: true,
+  sendEmail: true
 );
 
 echo "\n";
@@ -206,57 +207,57 @@ echo "4. HTML Element Builder\n";
 echo str_repeat("-", 50) . "\n";
 
 function button(
-    string $text,
-    string $type = 'button',
-    string $class = 'btn',
-    bool $disabled = false,
-    ?string $onclick = null,
-    array $dataAttributes = []
+  string $text,
+  string $type = 'button',
+  string $class = 'btn',
+  bool $disabled = false,
+  ?string $onclick = null,
+  array $dataAttributes = []
 ): string {
-    $html = "<button type=\"$type\" class=\"$class\"";
-    
-    if ($disabled) {
-        $html .= " disabled";
-    }
-    
-    if ($onclick) {
-        $html .= " onclick=\"$onclick\"";
-    }
-    
-    foreach ($dataAttributes as $key => $value) {
-        $html .= " data-$key=\"$value\"";
-    }
-    
-    $html .= ">$text</button>";
-    
-    return $html;
+  $html = "<button type=\"$type\" class=\"$class\"";
+
+  if ($disabled) {
+    $html .= " disabled";
+  }
+
+  if ($onclick) {
+    $html .= " onclick=\"$onclick\"";
+  }
+
+  foreach ($dataAttributes as $key => $value) {
+    $html .= " data-$key=\"$value\"";
+  }
+
+  $html .= ">$text</button>";
+
+  return $html;
 }
 
 echo "HTML Buttons:\n\n";
 
 // Primary button
 $btn1 = button(
-    text: 'Submit Form',
-    type: 'submit',
-    class: 'btn btn-primary'
+  text: 'Submit Form',
+  type: 'submit',
+  class: 'btn btn-primary'
 );
 echo "$btn1\n\n";
 
 // Disabled button
 $btn2 = button(
-    text: 'Processing...',
-    disabled: true,
-    class: 'btn btn-secondary'
+  text: 'Processing...',
+  disabled: true,
+  class: 'btn btn-secondary'
 );
 echo "$btn2\n\n";
 
 // Button with data attributes
 $btn3 = button(
-    text: 'Delete Item',
-    type: 'button',
-    class: 'btn btn-danger',
-    onclick: 'confirmDelete()',
-    dataAttributes: ['id' => '123', 'action' => 'delete']
+  text: 'Delete Item',
+  type: 'button',
+  class: 'btn btn-danger',
+  onclick: 'confirmDelete()',
+  dataAttributes: ['id' => '123', 'action' => 'delete']
 );
 echo "$btn3\n\n";
 
@@ -265,23 +266,23 @@ echo "5. API Request Builder\n";
 echo str_repeat("-", 50) . "\n";
 
 function apiRequest(
-    string $endpoint,
-    string $method = 'GET',
-    array $data = [],
-    array $headers = [],
-    int $timeout = 30,
-    bool $verifySSL = true,
-    int $retries = 0
+  string $endpoint,
+  string $method = 'GET',
+  array $data = [],
+  array $headers = [],
+  int $timeout = 30,
+  bool $verifySSL = true,
+  int $retries = 0
 ): array {
-    return [
-        'method' => $method,
-        'url' => "https://api.example.com/$endpoint",
-        'data' => $data,
-        'headers' => array_merge(['Content-Type' => 'application/json'], $headers),
-        'timeout' => $timeout,
-        'verify_ssl' => $verifySSL,
-        'retries' => $retries
-    ];
+  return [
+    'method' => $method,
+    'url' => "https://api.example.com/$endpoint",
+    'data' => $data,
+    'headers' => array_merge(['Content-Type' => 'application/json'], $headers),
+    'timeout' => $timeout,
+    'verify_ssl' => $verifySSL,
+    'retries' => $retries
+  ];
 }
 
 // Simple GET request
@@ -293,12 +294,12 @@ echo "  URL: {$request1['url']}\n\n";
 
 // Complex POST request
 $request2 = apiRequest(
-    endpoint: 'orders',
-    method: 'POST',
-    data: ['product_id' => 123, 'quantity' => 2],
-    headers: ['Authorization' => 'Bearer token123'],
-    timeout: 60,
-    retries: 3
+  endpoint: 'orders',
+  method: 'POST',
+  data: ['product_id' => 123, 'quantity' => 2],
+  headers: ['Authorization' => 'Bearer token123'],
+  timeout: 60,
+  retries: 3
 );
 
 echo "POST Request:\n";
@@ -313,35 +314,35 @@ echo "6. Report Generator\n";
 echo str_repeat("-", 50) . "\n";
 
 function generateReport(
-    string $type,
-    string $startDate,
-    string $endDate,
-    array $filters = [],
-    string $format = 'pdf',
-    bool $includeCharts = true,
-    bool $includeRawData = false,
-    string $orientation = 'portrait'
+  string $type,
+  string $startDate,
+  string $endDate,
+  array $filters = [],
+  string $format = 'pdf',
+  bool $includeCharts = true,
+  bool $includeRawData = false,
+  string $orientation = 'portrait'
 ): void {
-    echo "Generating $format report ($orientation):\n";
-    echo "  Type: $type\n";
-    echo "  Period: $startDate to $endDate\n";
-    echo "  Format: " . strtoupper($format) . "\n";
-    echo "  Charts: " . ($includeCharts ? 'Yes' : 'No') . "\n";
-    echo "  Raw Data: " . ($includeRawData ? 'Yes' : 'No') . "\n";
-    
-    if (!empty($filters)) {
-        echo "  Filters: " . json_encode($filters) . "\n";
-    }
+  echo "Generating $format report ($orientation):\n";
+  echo "  Type: $type\n";
+  echo "  Period: $startDate to $endDate\n";
+  echo "  Format: " . strtoupper($format) . "\n";
+  echo "  Charts: " . ($includeCharts ? 'Yes' : 'No') . "\n";
+  echo "  Raw Data: " . ($includeRawData ? 'Yes' : 'No') . "\n";
+
+  if (!empty($filters)) {
+    echo "  Filters: " . json_encode($filters) . "\n";
+  }
 }
 
 echo "Sales Report:\n";
 generateReport(
-    type: 'sales',
-    startDate: '2024-01-01',
-    endDate: '2024-12-31',
-    filters: ['region' => 'North America', 'product_category' => 'Electronics'],
-    includeCharts: true,
-    orientation: 'landscape'
+  type: 'sales',
+  startDate: '2024-01-01',
+  endDate: '2024-12-31',
+  filters: ['region' => 'North America', 'product_category' => 'Electronics'],
+  includeCharts: true,
+  orientation: 'landscape'
 );
 
 echo "\n💡 Best Practice: Use named arguments for functions with many optional\n";
