@@ -6,11 +6,31 @@
  * or return functions. They enable functional programming patterns in PHP.
  * 
  * Common high-order functions in PHP:
- * - array_map()    : Transform each element
- * - array_filter() : Select elements based on condition
- * - array_reduce() : Reduce array to single value
- * - array_walk()   : Apply function to each element
- * - usort()        : Custom sorting
+ * - array_map()        : Transform each element
+ * - array_filter()     : Select elements based on condition
+ * - array_reduce()     : Reduce array to single value
+ * - array_walk()       : Apply function to each element
+ * - array_walk_recursive() : Apply function to each element recursively
+ * - usort()            : Custom sorting (values only)
+ * - uasort()           : Custom sorting, preserve keys
+ * - uksort()           : Custom sorting by keys
+ * - array_udiff()      : Custom comparison for differences
+ * - array_uintersect() : Custom comparison for intersections
+ * - array_replace_callback() : Replace values using callback (PHP 8.3+)
+ * - array_column()     : Can use callback for extraction in PHP 7.0+
+ * - array_sum(array_map(...)) : Common functional pattern
+ * - set_error_handler() : Custom handler for errors
+ * - set_exception_handler() : Custom handler for exceptions
+ * - register_shutdown_function() : Execute function at script end
+ * - preg_replace_callback() : Replace with computed value
+ * - spl_autoload_register() : Register custom class loader
+ * - usleep(function() {...}) : via callable wrappers, delays, etc.
+ * - Closure::fromCallable() : Turn callable into Closure
+ * - array_diff_uassoc() : Compare arrays with user-defined equality for keys + values
+ * - array_udiff_assoc() : Compare arrays with user-defined equality for values + keys
+ * - ob_start()          : Output buffering callback
+ * - iterator_apply()    : Apply function to each iterator element
+ * - array_map_recursive() : (user-defined, but common pattern)
  * 
  * Benefits: Code reusability, cleaner syntax, functional programming patterns.
  */
@@ -21,11 +41,16 @@ echo "=== HIGH ORDER FUNCTIONS ===\n\n";
 echo "1. Data Transformation Pipeline\n";
 echo str_repeat("-", 50) . "\n";
 
+enum Status:string {
+  case Active = 'active';
+  case Inactive = 'inactive';
+}
+
 $rawUserData = [
-    ['name' => 'john doe', 'email' => 'JOHN@EXAMPLE.COM', 'age' => '25', 'status' => 'active'],
-    ['name' => 'jane smith', 'email' => 'jane@example.com', 'age' => '30', 'status' => 'inactive'],
-    ['name' => 'bob wilson', 'email' => 'BOB@EXAMPLE.COM', 'age' => '22', 'status' => 'active'],
-    ['name' => 'alice brown', 'email' => 'alice@example.com', 'age' => '35', 'status' => 'active'],
+    ['name' => 'john doe', 'email' => 'JOHN@EXAMPLE.COM', 'age' => '25', 'status' => Status::Active],
+    ['name' => 'jane smith', 'email' => 'jane@example.com', 'age' => '30', 'status' => Status::Inactive],
+    ['name' => 'bob wilson', 'email' => 'BOB@EXAMPLE.COM', 'age' => '22', 'status' => Status::Active],
+    ['name' => 'alice brown', 'email' => 'alice@example.com', 'age' => '35', 'status' => Status::Active],
 ];
 
 echo "Raw data transformation pipeline:\n\n";
@@ -38,7 +63,7 @@ $processedUsers = array_map(
         'age' => (int)$user['age'],
         'status' => $user['status']
     ],
-    array_filter($rawUserData, fn($user) => $user['status'] === 'active')
+    array_filter($rawUserData, fn($user) => $user['status'] === Status::Active)
 );
 
 foreach ($processedUsers as $user) {
@@ -56,6 +81,7 @@ $cartItems = [
     ['name' => 'Mouse', 'price' => 29.99, 'quantity' => 2, 'discount' => 0.00],
     ['name' => 'Keyboard', 'price' => 79.99, 'quantity' => 1, 'discount' => 0.05],
     ['name' => 'Monitor', 'price' => 299.99, 'quantity' => 2, 'discount' => 0.15],
+    ['name' => 'Voucher', 'price' => 50, 'quantity' => 1, 'discount' => 1]
 ];
 
 // Calculate subtotal for each item
@@ -175,6 +201,7 @@ foreach ($testData as $field => $config) {
 echo "\n";
 
 // Real-world example: Function composition
+// NOTE: EXCELLENT EXAMPLE
 echo "5. Function Composition\n";
 echo str_repeat("-", 50) . "\n";
 
