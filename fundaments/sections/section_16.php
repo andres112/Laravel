@@ -31,11 +31,6 @@ $products = [
 
 $taxRate = 0.18;
 
-// Traditional closure (verbose)
-$pricesWithTax = array_map(function($product) use ($taxRate) {
-    return $product['price'] * (1 + $taxRate);
-}, $products);
-
 // Arrow function (concise)
 $pricesWithTaxArrow = array_map(
     fn($product) => $product['price'] * (1 + $taxRate),
@@ -100,6 +95,12 @@ $products = [
     ['name' => 'Mouse', 'price' => 29.99, 'rating' => 4.8, 'stock' => 50],
     ['name' => 'Keyboard', 'price' => 79.99, 'rating' => 4.3, 'stock' => 0],
     ['name' => 'Monitor', 'price' => 299.99, 'rating' => 4.7, 'stock' => 8],
+    ['name' => 'Headphones', 'price' => 199.99, 'rating' => 4.6, 'stock' => 25],
+    ['name' => 'Webcam', 'price' => 89.99, 'rating' => 4.2, 'stock' => 0],
+    ['name' => 'Tablet', 'price' => 499.99, 'rating' => 4.4, 'stock' => 12],
+    ['name' => 'Smartphone', 'price' => 699.99, 'rating' => 4.5, 'stock' => 30],
+    ['name' => 'Charger', 'price' => 19.99, 'rating' => 4.1, 'stock' => 100],
+    ['name' => 'USB Cable', 'price' => 9.99, 'rating' => 4.0, 'stock' => 0],
 ];
 
 // Sort by price (ascending)

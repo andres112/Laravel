@@ -261,8 +261,22 @@ $tips = [
     "✓ Enable compression (gzip) for responses",
 ];
 
+$different = [
+    "✓ Prefer foreach over for loops for array iteration (faster and more readable)",
+    "✓ Use implode() (array join) for string concatenation instead of .= in loops",
+    "✓ Cache count() results outside loops to avoid repeated function calls",
+    "✓ Avoid function calls in tight loops when possible (prefer inline operations)",
+    "✓ Use array_flip + isset for fast lookups in large arrays",
+    "✓ Implement caching for expensive calculations to reduce repeated work",
+    "✓ Process data on-the-fly with generators to minimize memory usage"
+];
+
 foreach ($tips as $tip) {
     echo "$tip\n";
+}
+
+foreach ($different as $diff) {
+    echo "$diff\n";
 }
 
 echo "\n💡 Remember: Premature optimization is the root of all evil.\n";
