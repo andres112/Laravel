@@ -213,6 +213,7 @@ $transactions = [
     ['type' => 'income', 'amount' => 300, 'category' => 'freelance'],
     ['type' => 'expense', 'amount' => 50, 'category' => 'utilities'],
     ['type' => 'expense', 'amount' => 200, 'category' => 'entertainment'],
+    ['type' => 'expense', 'amount' => 150, 'category' => 'entertainment']
 ];
 
 // Calculate total income
