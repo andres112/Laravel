@@ -52,7 +52,7 @@ $fileSystem = [
                 ['name' => 'UserTest.php', 'type' => 'file', 'size' => 2048],
             ]
         ],
-        ['name' => 'README.md', 'type' => 'file', 'size' => 512],
+        ['name' => 'README.md', 'type' => 'file', 'size' => 8192],
     ]
 ];
 
@@ -94,7 +94,7 @@ function calculateSize(array $node): int {
             $totalSize += calculateSize($child);
         }
     }
-    
+    echo "Node '{$node['name']}' total size: " . number_format($totalSize / 1024, 2) . " KB\n";
     return $totalSize;
 }
 
@@ -162,7 +162,14 @@ $organization = [
             'name' => 'Jane Doe',
             'position' => 'CTO',
             'reports' => [
-                ['name' => 'Bob Wilson', 'position' => 'Senior Developer'],
+                [
+                  'name' => 'Bob Wilson', 
+                  'position' => 'Senior Developer', 
+                  'reports' => [
+                    ['name' => 'Charlie Green', 'position' => 'Junior Developer'],
+                    [ 'name'=> 'Jane Smith','position'=> 'Junior Developer'],
+                    ['name'=> 'Will Smith','position'=> 'Intern'],
+                ]],
                 ['name' => 'Alice Brown', 'position' => 'DevOps Engineer'],
             ]
         ],
@@ -172,6 +179,10 @@ $organization = [
             'reports' => [
                 ['name' => 'Sarah Davis', 'position' => 'Accountant'],
             ]
+        ],
+        [
+            'name' => 'Emily White',
+            'position' => 'COO',
         ],
     ]
 ];
@@ -196,15 +207,14 @@ echo "\n";
 
 // Count total employees
 function countEmployees(array $employee): int {
-    $count = 1; // Count the current employee
-    
-    if (isset($employee['reports'])) {
-        foreach ($employee['reports'] as $report) {
-            $count += countEmployees($report);
-        }
-    }
-    
-    return $count;
+    if (!isset($employee['reports'])) {
+        return 1;
+    }    
+    return 1 + array_reduce(
+        $employee['reports'],
+        fn($sum, $report) => $sum + countEmployees($report),
+        0
+    );
 }
 
 echo "Total employees: " . countEmployees($organization) . "\n\n";
