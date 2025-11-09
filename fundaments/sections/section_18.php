@@ -331,14 +331,14 @@ $fib = new FibonacciCalculator();
 
 echo "Fibonacci sequence:\n";
 $sequence = [];
-for ($i = 0; $i <= 10; $i++) {
+for ($i = 0; $i <= 30; $i++) {
     $sequence[] = $fib->calculate($i);
 }
-echo "  First 11 numbers: " . implode(', ', $sequence) . "\n";
+echo "  First 31 numbers: " . implode(', ', $sequence) . "\n";
 
 echo "\nLarge number calculation:\n";
-$large = $fib->calculate(30);
-echo "  Fibonacci(30) = " . number_format($large) . "\n";
+$large = $fib->calculate(40);
+echo "  Fibonacci(40) = " . number_format($large) . "\n";
 echo "  Cache entries: {$fib->getCacheSize()}\n\n";
 
 // Real-world example: Path finding in tree
@@ -365,10 +365,14 @@ function findPath(array $node, string $target, array $path = []): ?array {
 }
 
 $targetFile = 'User.php';
+$start = microtime(true);
 $path = findPath($fileSystem, $targetFile);
+$end = microtime(true);
+$duration = $end - $start;
 
 if ($path !== null) {
     echo "Path to '{$targetFile}': " . implode(' → ', $path) . "\n";
+    echo "Search took " . number_format($duration * 1000, 4) . " ms\n";
 } else {
     echo "'{$targetFile}' not found\n";
 }
