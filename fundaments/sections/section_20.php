@@ -87,6 +87,8 @@ $orderNumber = "ORD-2024-1001";
 $orderTotal = 299.99;
 $trackingNumber = "1Z999AA1234567890";
 
+// The notation <<<EMAIL starts a heredoc string
+// It allows multi-line strings with variable interpolation
 $emailTemplate = <<<EMAIL
 Dear $customerName,
 
@@ -106,8 +108,7 @@ The Example Store Team
 EMAIL;
 
 echo "Generated Email:\n";
-echo str_repeat("-", 50) . "\n";
-echo $emailTemplate . "\n\n";
+echo "\n".$emailTemplate . "\n\n";
 
 // Real-world example: String validation and sanitization
 echo "4. Input Sanitization & Validation\n";
@@ -157,18 +158,19 @@ $articles = [
     ],
     [
         'title' => 'Advanced Laravel Techniques',
-        'content' => 'Laravel provides expressive, elegant syntax to build robust web applications. This article covers advanced patterns and best practices for professional Laravel development.'
+        'content' => 'Laravel provides expressive, elegant syntax to build robust web applications. This article covers advanced-patterns and best practices for professional Laravel development.'
     ],
 ];
 
 foreach ($articles as $article) {
-    $maxLength = 100;
+    $maxLength = 120;
     $preview = $article['content'];
     
     if (strlen($preview) > $maxLength) {
         // Find last space before max length
         $preview = substr($preview, 0, $maxLength);
         $lastSpace = strrpos($preview, ' ');
+        echo 'Last space position: ' . $lastSpace . "\n";
         if ($lastSpace !== false) {
             $preview = substr($preview, 0, $lastSpace);
         }
@@ -261,3 +263,18 @@ foreach ($searchTerms as $term) {
 
 echo "💡 Best Practice: Always sanitize user input, use appropriate string\n";
 echo "   functions for the task, and consider UTF-8 encoding for international text.\n";
+
+// Real-world example: Using string padding for formatting
+echo "9. String Padding for Formatting\n";
+echo str_repeat("-", 50) . "\n";
+
+$documentContent = "Chapter 1: Introduction to PHP\nChapter 2: Advanced PHP Techniques\nChapter 3: PHP and Web Development\nChapter 4: PHP Best Practices and Patterns in 2025";
+$chapterIndexes = [1, 20, 33, 45];
+$lines = explode("\n", $documentContent);
+foreach ($lines as $line) {
+    // Pad chapter titles to align numbers
+    $paddedLine = str_pad($line, 100, '.', STR_PAD_RIGHT);
+    echo $paddedLine . ' '. $chapterIndexes[array_search(substr($line, 8, 1), array_map(fn($i) => (string)$i, range(1, count($lines))))] . "\n";
+}
+echo "\n";
+
