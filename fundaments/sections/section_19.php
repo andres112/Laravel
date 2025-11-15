@@ -135,17 +135,16 @@ echo str_repeat("-", 50) . "\n";
 
 function generateIds(string $prefix = 'ID'): Generator
 {
-  $counter = 1;
   while (true) {
+    $counter = rand(0,999999);
     yield $prefix . str_pad($counter, 6, '0', STR_PAD_LEFT);
-    $counter++;
   }
 }
 
 echo "Generating unique IDs:\n";
 $idGenerator = generateIds('ORD');
 $orders = [];
-for ($i = 0; $i < 5; $i++) {
+for ($i = 0; $i < 500; $i++) {
   $orders[] = $idGenerator->current();
   $idGenerator->next();
 }
