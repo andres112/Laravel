@@ -278,3 +278,32 @@ foreach ($lines as $line) {
 }
 echo "\n";
 
+// Real-world example: Advanced stuff
+echo "10. Advanced String Handling\n";
+echo str_repeat("-", 50) . "\n";
+
+$chineseText = "汉字是中文的书写系统。它们有着悠久的历史和丰富的文化内涵。";
+$wrongLength = strlen($chineseText);
+$correctLength = mb_strlen($chineseText, 'UTF-8');
+echo "Chinese Text: $chineseText\n";
+echo "Length (bytes): $wrongLength\n";
+echo "Length (characters): $correctLength\n";
+
+$url= "https://example.com/search?query=php+字符串&lang=zh-cn";
+$encodedUrl = rawurlencode($url);
+$decodedUrl = rawurldecode($encodedUrl);
+echo "Original URL: $url\n";
+echo "Encoded URL: $encodedUrl\n";
+echo "Decoded URL: $decodedUrl\n\n";
+var_dump($encodedUrl);
+
+$htmlString = "<div><h1>Title</h1><p>This is a <strong>bold</strong> statement.</p></div>";
+$plainText = strip_tags($htmlString);
+echo "HTML String: $htmlString\n";
+echo "Plain Text: $plainText\n\n";
+
+$textToEncode = "Encode this string to Base64!";
+$base64String = base64_encode($textToEncode);
+$decodedBase64 = base64_decode($base64String);
+echo "Base64 Encoded: $base64String\n";
+echo "Base64 Decoded: $decodedBase64\n";

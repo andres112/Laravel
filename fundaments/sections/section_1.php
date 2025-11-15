@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DATA TYPES in PHP
  * 
@@ -46,6 +47,51 @@ echo "Subtotal: $" . number_format($subtotal, 2) . "\n";
 echo "Tax (18%): $" . number_format($tax, 2) . "\n";
 echo "Total: $" . number_format($total, 2) . "\n\n";
 
+// Real-world example: Math operations
+// round, floor, ceil, rand, min, max, abs, sqrt, pow, log, exp, sin, cos, tan, number_format
+echo "2.1. Math Operations \n";
+echo str_repeat("-", 50) . "\n";
+
+$number = 7.65;
+echo "Original number: $number\n";
+echo "Rounded: " . round($number) . "\n";
+echo "Floored: " . floor($number) . "\n";
+echo "Ceiled: " . ceil($number) . "\n";
+
+$random = rand(1, 100);
+echo "Random number (1-100): $random\n";
+
+$values = [3, 7, 2, 9, 5];
+echo "Values: " . implode(", ", $values) . "\n";
+echo "Min: " . min($values) . "\n";
+echo "Max: " . max($values) . "\n";
+
+$negative = -42;
+echo "Absolute value of $negative: " . abs($negative) . "\n\n";
+
+// More math operations
+$base = 2;
+$exponent = 8;
+echo "$base raised to the power of $exponent: " . pow($base, $exponent) . "\n";
+
+$sqrtNum = 49;
+echo "Square root of $sqrtNum: " . sqrt($sqrtNum) . "\n";
+
+$logNum = 1000;
+echo "Natural log of $logNum: " . log($logNum) . "\n";
+echo "Base-10 log of $logNum: " . log10($logNum) . "\n";
+
+$expNum = 2;
+echo "e^$expNum: " . exp($expNum) . "\n";
+
+$angle = pi() / 4; // 45 degrees
+echo "sin(45°): " . sin($angle) . "\n";
+echo "cos(45°): " . cos($angle) . "\n";
+echo "tan(45°): " . tan($angle) . "\n\n";
+
+echo rad2deg(atan2($expNum, 1)) . " degrees\n\n";
+
+
 // Real-world example: String manipulation for display
 echo "3. String Types - User Profile\n";
 echo str_repeat("-", 50) . "\n";
@@ -64,16 +110,16 @@ echo "4. Array Types - Shopping Cart\n";
 echo str_repeat("-", 50) . "\n";
 
 $cart = [
-    ['id' => 1, 'name' => 'Laptop', 'price' => 999.99, 'qty' => 1],
-    ['id' => 2, 'name' => 'Mouse', 'price' => 29.99, 'qty' => 2],
-    ['id' => 3, 'name' => 'Keyboard', 'price' => 79.99, 'qty' => 1],
+  ['id' => 1, 'name' => 'Laptop', 'price' => 999.99, 'qty' => 1],
+  ['id' => 2, 'name' => 'Mouse', 'price' => 29.99, 'qty' => 2],
+  ['id' => 3, 'name' => 'Keyboard', 'price' => 79.99, 'qty' => 1],
 ];
 
 $cartTotal = 0;
 foreach ($cart as $item) {
-    $itemTotal = $item['price'] * $item['qty'];
-    $cartTotal += $itemTotal;
-    echo "{$item['name']} x{$item['qty']}: $" . number_format($itemTotal, 2) . "\n";
+  $itemTotal = $item['price'] * $item['qty'];
+  $cartTotal += $itemTotal;
+  echo "{$item['name']} x{$item['qty']}: $" . number_format($itemTotal, 2) . "\n";
 }
 echo "Cart Total: $" . number_format($cartTotal, 2) . "\n\n";
 
@@ -97,12 +143,12 @@ echo str_repeat("-", 50) . "\n";
 echo "var_dump() shows the exact type and value:\n\n";
 
 $mixedData = [
-    'string' => '123',
-    'integer' => 123,
-    'float' => 123.45,
-    'boolean' => true,
-    'null' => null,
-    'array' => [1, 2, 3],
+  'string' => '123',
+  'integer' => 123,
+  'float' => 123.45,
+  'boolean' => true,
+  'null' => null,
+  'array' => [1, 2, 3],
 ];
 
 var_dump($mixedData);
