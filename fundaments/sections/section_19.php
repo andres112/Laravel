@@ -183,6 +183,31 @@ foreach (range_step(1000, 0, -7) as $num) {
 
 echo "\n\n";
 
+function primeNumbers(int $limit): Generator
+{
+  $num = 2;
+  while ($num <= $limit) {
+    $isPrime = true;
+    for ($i = 2; $i <= sqrt($num); $i++) {
+      if ($num % $i === 0) {
+        $isPrime = false;
+        break;
+      }
+    }
+    if ($isPrime) {
+      yield $num;
+    }
+    $num++;
+  }
+}
+
+echo "Prime numbers up to 50:\n  ";
+foreach (primeNumbers(500) as $prime) {
+  echo "$prime ";
+}
+
+echo "\n\n";
+
 // Real-world example: Data transformation pipeline
 echo "6. Data Transformation Pipeline\n";
 echo str_repeat("-", 50) . "\n";
@@ -203,7 +228,7 @@ function transformNumbers(iterable $numbers, callable $transformer): Generator
   }
 }
 
-$data = range(1, 20);
+$data = range(1, 100);
 
 // Pipeline: Filter even numbers → Square them → Only show results > 50
 $pipeline = transformNumbers(
@@ -243,7 +268,7 @@ function fetchApiPages(int $totalItems, int $itemsPerPage = 20): Generator
 
 echo "Streaming 100 items from API:\n";
 $processedItems = 0;
-foreach (fetchApiPages(100, 20) as $response) {
+foreach (fetchApiPages(237, 20) as $response) {
   $processedItems += $response['items'];
   echo "  Page {$response['page']}: {$response['items']} items";
   echo " (Total processed: {$processedItems})";
@@ -263,7 +288,7 @@ function processQueue(): Generator
   echo "  Queue processor started...\n";
 
   while (true) {
-    $task = yield $processed;
+    $task = yield $processed; // ← yield pauses here, returns $processed. when resumed, receives value via send()
 
     if ($task === null) {
       break;
