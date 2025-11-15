@@ -171,13 +171,13 @@ function range_step(int $start, int $end, int $step = 1): Generator
   }
 }
 
-echo "Even numbers from 0 to 20:\n  ";
-foreach (range_step(0, 20, 2) as $num) {
+echo "Even numbers from 0 to 200:\n  ";
+foreach (range_step(0, 200, 2) as $num) {
   echo "$num ";
 }
 
-echo "\n\nCountdown from 10 to 0 (step -2):\n  ";
-foreach (range_step(10, 0, -2) as $num) {
+echo "\n\nCountdown from 1000 to 0 (step -7):\n  ";
+foreach (range_step(1000, 0, -7) as $num) {
   echo "$num ";
 }
 
