@@ -1,0 +1,21 @@
+name,email,age,status
+John Doe,john@example.com,25,active
+Jane Smith,jane@example.com,30,active
+Bob Wilson,bob@example.com,22,inactive
+Alice Brown,alice@example.com,35,active
+Eve Adams,eve@example.com,28,active
+Tom Clark,tom@example.com,40,inactive
+Sara Lee,sara@example.com,32,active
+Mike Ford,mike@example.com,27,active
+Anna Bell,anna@example.com,29,inactive
+Chris King,chris@example.com,31,active
+Linda Fox,linda@example.com,36,active
+Paul Nash,paul@example.com,24,inactive
+Helen Ray,helen@example.com,33,active
+Gary Cole,gary@example.com,38,active
+Nina Park,nina@example.com,26,active
+Oscar Wood,oscar@example.com,41,inactive
+Tina Moss,tina@example.com,34,active
+Sam Page,sam@example.com,39,active
+Rita Lane,rita@example.com,37,active
+Ben Hall,ben@example.com,23,inactive
