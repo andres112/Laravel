@@ -21,6 +21,7 @@ $sections = [
     18 => 'RECURSION',
     19 => 'GENERATORS',
     20 => 'STRINGS & STRING SEARCH',
+    21 => 'ARRAYS',
 ];
 
 // Print menu
