@@ -64,3 +64,24 @@ var_dump(
     array_diff($set1, $set2), // Elements in set1 not in set2
     array_diff($set2, $set1)  // Elements in set2 not in set1
 );
+
+echo "Keys and Values of Associative Array:\n";
+$keys = array_map(fn($n) => ucfirst($n), array_keys($associativeArray));
+$values = array_values($associativeArray);
+var_dump($keys, $values);
+var_dump(
+    array_key_exists("age", $associativeArray),
+    in_array("John", $associativeArray),
+);
+
+echo "Merging Arrays:\n";
+$merged = array_merge($set1, $set2);
+var_dump($merged, array_merge($associativeArray, ["profession" => "Developer", "country" => "Canada"]));
+
+echo "unique and slice and search:\n";
+
+var_dump(
+    array_unique(array_merge($set1, $set2)),
+    array_slice($numbers, 2, 5), // From index 2, get
+    array_search("cherry", $fruitArray),
+);
