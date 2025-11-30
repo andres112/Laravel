@@ -33,6 +33,7 @@ ksort($associativeArray); // Sort by keys
 var_dump($associativeArray);
 
 // numbers
+echo "Array of numbers";
 $numbers = range(1,10);
 var_dump($numbers);
 $squared = array_map(fn($n) => $n * $n, $numbers);
@@ -40,3 +41,14 @@ var_dump($squared);
 
 $evenNumbers = array_filter($numbers, fn($n) => $n % 2 === 0);
 var_dump($evenNumbers);
+
+$sum = array_reduce($numbers, fn($carry, $n) => $carry + $n, 0);
+echo "Sum of numbers: $sum\n";
+
+// merging arrays
+$moreNumbers = [-5, ...$numbers, 11, 12];
+var_dump($moreNumbers);
+
+// array destructuring
+[$first, , $third] = $fruitArray;
+echo "First fruit: $first, Third fruit: $third\n";
