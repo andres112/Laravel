@@ -45,10 +45,22 @@ var_dump($evenNumbers);
 $sum = array_reduce($numbers, fn($carry, $n) => $carry + $n, 0);
 echo "Sum of numbers: $sum\n";
 
-// merging arrays
+// adding elements to arrays
 $moreNumbers = [-5, ...$numbers, 11, 12];
 var_dump($moreNumbers);
 
 // array destructuring
 [$first, , $third] = $fruitArray;
 echo "First fruit: $first, Third fruit: $third\n";
+
+// More advanced array functions
+
+$set1 = [1, 2, 3, 4, 5];
+$set2 = [4, 5, 6, 7, 8];
+
+echo "Set operations:\n";
+var_dump(
+    array_intersect($set1, $set2),
+    array_diff($set1, $set2), // Elements in set1 not in set2
+    array_diff($set2, $set1)  // Elements in set2 not in set1
+);
