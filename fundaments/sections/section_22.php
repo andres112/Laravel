@@ -28,3 +28,23 @@ echo $person->introduce() . "\n\n";
 
 $anotherPerson = new Person("jane smith", 25);
 echo $anotherPerson->introduce() . "\n\n";
+
+echo "Inheritance\n";
+echo str_repeat("-", 50) . "\n";
+
+// Inheritance example
+class Employee extends Person {
+    public function __construct(public Person $person, public string $position) {
+        parent::__construct($person->name, $person->age);
+    }
+
+    public function introduce(): string {
+        return parent::introduce() . " I work as a {$this->position}.";
+    }
+}
+
+$worker = new Employee($person, "Software Developer");
+echo $worker->introduce() . "\n\n";
+
+$anotherWorker = new Employee($anotherPerson, "Designer");
+echo $anotherWorker->introduce() . "\n\n";
