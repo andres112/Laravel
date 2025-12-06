@@ -22,6 +22,7 @@ $sections = [
     19 => 'GENERATORS',
     20 => 'STRINGS & STRING SEARCH',
     21 => 'ARRAYS',
+    22 => 'CLASSES',
 ];
 
 // Print menu
