@@ -104,3 +104,65 @@ echo "Attempted to withdraw $150, balance remains: $" . $account->getBalance() .
 // Static properties and methods
 echo "\nStatic Properties and Methods\n";
 echo str_repeat("-", 50) . "\n";
+
+class MathHelper {
+    public static float $pi = 3.14159;
+
+    public static function calculateCircumference(float $radius): float {
+        return 2 * self::$pi * $radius;
+    }
+
+    public static function square(float $number): float {
+        return $number * $number;
+    }
+}
+
+var_dump(
+    MathHelper::$pi,
+    MathHelper::calculateCircumference(5),
+    MathHelper::square(4)
+);
+
+// Singleton Pattern with static method
+echo "\nSingleton Pattern\n";
+echo str_repeat("-", 50) . "\n";
+
+class Connection {
+    private static ?Connection $instance = null;
+    // Private constructor to prevent direct instantiation
+    private function __construct() { }
+    public static function singleton(): Connection {
+        /**
+         * static:: means “use the class that invoked the method,”
+         * self:: means “use the class where this code is defined.”
+         */
+        if (static::$instance === null) {
+            static::$instance = new Connection();
+        }
+        return static::$instance;
+    }
+}
+
+$connection = Connection::singleton();
+
+// Example of late static binding vs early binding
+echo "\nLate Static Binding vs Early Binding\n";
+
+class Animal
+{
+    public static function type()
+    {
+        return static::class; // late static binding
+    }
+
+    public static function whoSelf()
+    {
+        return self::class; // early binding
+    }
+}
+
+class Dog extends Animal {}
+
+echo Dog::type();     // Dog
+echo "\n";
+echo Dog::whoSelf();  // Animal
