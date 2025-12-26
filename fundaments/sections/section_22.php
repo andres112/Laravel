@@ -206,14 +206,21 @@ abstract class OnlinePaymentProcessor implements PaymentProcessor
     ) {
     }
 
+    abstract protected function validateApiKey(): bool;
+
     public function processPayment(float $amount): bool
     {
-        // Common processing logic can go here
+        if (!$this->validateApiKey()) {
+            throw new Exception("Invalid API Key");
+        }
         return true;
     }
 
     public function refundPayment(float $amount): bool
     {
+        if (!$this->validateApiKey()) {
+            throw new Exception("Invalid API Key");
+        }
         return true;
     }
 }
@@ -221,10 +228,20 @@ abstract class OnlinePaymentProcessor implements PaymentProcessor
 // Implement interface
 class StripeProcessor extends OnlinePaymentProcessor
 {
-
+    public function validateApiKey(): bool
+    {
+        return strpos($this->apiKey, "sk_") === 0;
+    }
 }
 
 // Extend from abstract class
 class PaypalProcessor extends OnlinePaymentProcessor
 {
+    public function validateApiKey(): bool
+    {
+        return strlen($this->apiKey) === 32;
+    }
 }
+
+$processor = new StripeProcessor("KEY_sk_test_123456");
+$processor->processPayment(0);
