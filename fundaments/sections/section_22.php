@@ -237,13 +237,14 @@ class StripeProcessor extends OnlinePaymentProcessor
 
     public function executeProcess(float $amount): bool
     {
-        // Simulate Stripe payment processing logic
+        echo "Processing \${$amount} payment through Stripe.\n";
         return true;
     }
 
     public function executeRefund(float $amount): bool
     {
-        throw new \Exception('Not implemented');
+        echo "Refunding \${$amount} payment through Stripe.\n";
+        return true;
     }
 }
 
@@ -257,17 +258,16 @@ class PaypalProcessor extends OnlinePaymentProcessor
 
     public function executeProcess(float $amount): bool
     {
-        throw new \Exception('Not implemented');
+        echo "Processing \${$amount} payment through PayPal.\n";
+        return true;
     }
 
     public function executeRefund(float $amount): bool
     {
-        throw new \Exception('Not implemented');
+        echo "Refunding \${$amount} payment through PayPal.\n";
+        return true;
     }
 }
-
-$processor = new StripeProcessor("sk_test_123456");
-$processor->processPayment(0);
 
 // Extend directly from interface. Due to API_KEY is not required for cash
 class CashProcessor implements PaymentProcessor
@@ -282,3 +282,43 @@ class CashProcessor implements PaymentProcessor
         return true;
     }
 }
+
+// Composition pattern to use different payment processors
+class OrderProcessor
+{
+    public function __construct(private PaymentProcessor $paymentProcessor)
+    {}
+
+    public function processOrder(float $amount): void {
+        if ($this->paymentProcessor->processPayment($amount)) {
+            echo "Order processed successfully.\n";
+        } else {
+            echo "Order processing failed.\n";
+        }
+    }
+
+    public function refundOrder(float $amount): void{
+        if ($this->paymentProcessor->refundPayment($amount)) {
+            echo "Order refunded successfully.\n";
+        } else {
+            echo "Order refund failed.\n";
+        }
+    }
+}
+
+$stripeProcessor = new StripeProcessor("sk_test_123456");
+$paypalProcessor = new PaypalProcessor("valid_32_character_api_key_12345");
+$cashProcessor = new CashProcessor();
+
+$stripeOrder = new OrderProcessor($stripeProcessor);
+$paypalOrder = new OrderProcessor($paypalProcessor);
+$cashOrder = new OrderProcessor($cashProcessor);
+
+$stripeOrder->processOrder(100);
+$stripeOrder->refundOrder(50);
+
+$paypalOrder->processOrder(150.12);
+$paypalOrder->refundOrder(75.06);
+
+$cashOrder->processOrder(200);
+$cashOrder->refundOrder(100);
