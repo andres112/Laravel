@@ -207,13 +207,15 @@ abstract class OnlinePaymentProcessor implements PaymentProcessor
     }
 
     abstract protected function validateApiKey(): bool;
+    abstract protected function executeProcess(float $amount): bool;
+    abstract protected function executeRefund(float $amount): bool;
 
     public function processPayment(float $amount): bool
     {
         if (!$this->validateApiKey()) {
             throw new Exception("Invalid API Key");
         }
-        return true;
+        return $this->executeProcess($amount);
     }
 
     public function refundPayment(float $amount): bool
@@ -221,7 +223,7 @@ abstract class OnlinePaymentProcessor implements PaymentProcessor
         if (!$this->validateApiKey()) {
             throw new Exception("Invalid API Key");
         }
-        return true;
+        return $this->executeRefund($amount);
     }
 }
 
@@ -232,6 +234,17 @@ class StripeProcessor extends OnlinePaymentProcessor
     {
         return strpos($this->apiKey, "sk_") === 0;
     }
+
+    public function executeProcess(float $amount): bool
+    {
+        // Simulate Stripe payment processing logic
+        return true;
+    }
+
+    public function executeRefund(float $amount): bool
+    {
+        throw new \Exception('Not implemented');
+    }
 }
 
 // Extend from abstract class
@@ -241,7 +254,31 @@ class PaypalProcessor extends OnlinePaymentProcessor
     {
         return strlen($this->apiKey) === 32;
     }
+
+    public function executeProcess(float $amount): bool
+    {
+        throw new \Exception('Not implemented');
+    }
+
+    public function executeRefund(float $amount): bool
+    {
+        throw new \Exception('Not implemented');
+    }
 }
 
-$processor = new StripeProcessor("KEY_sk_test_123456");
+$processor = new StripeProcessor("sk_test_123456");
 $processor->processPayment(0);
+
+// Extend directly from interface. Due to API_KEY is not required for cash
+class CashProcessor implements PaymentProcessor
+{
+    public function processPayment(float $amount): bool
+    {
+        return true;
+    }
+
+    public function refundPayment(float $amount): bool
+    {
+        return true;
+    }
+}
