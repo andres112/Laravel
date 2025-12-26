@@ -165,4 +165,46 @@ class Dog extends Animal {}
 
 echo Dog::type();     // Dog
 echo "\n";
-echo Dog::whoSelf();  // Animal
+echo Dog::whoSelf()."\n";  // Animal
+
+// Interfaces
+echo "\nInterfaces\n";
+echo str_repeat("-", 50) . "\n";
+
+interface PaymentProcessor {
+    public function processPayment(float $amount): bool;
+    public function refundPayment(float $amount): bool;
+}
+
+// Abstract class implementing the interface for common functionality
+abstract class OnlinePaymentProcessor implements PaymentProcessor {
+    // This abstract class can provide common functionality for online payment processors
+    abstract public function processPayment(float $amount): bool;
+    abstract public function refundPayment(float $amount): bool;
+}
+
+// Implement interface
+class StripeProcessor implements PaymentProcessor {
+    // Implementing the methods defined in the PaymentProcessor interface
+    public function processPayment(float $amount): bool {
+        echo "Processing payment of $$amount with Stripe.\n";
+        return true;
+    }
+    public function refundPayment(float $amount): bool {
+        echo "Refunding payment of $$amount with Stripe.\n";
+        return true;
+    }
+}
+
+// Extend from abstract class
+class PaypalProcessor extends OnlinePaymentProcessor {
+    public function processPayment(float $amount): bool {
+        echo "Processing payment of $$amount with PayPal.\n";
+        return true;
+    }
+
+    public function refundPayment(float $amount): bool {
+        echo "Refunding payment of $$amount with PayPal.\n";
+        return true;
+    }
+}
