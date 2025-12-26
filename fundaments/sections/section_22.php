@@ -1,9 +1,35 @@
 <?php
-
 /**
- * Classes
+ * CLASSES & OBJECT-ORIENTED PROGRAMMING
+ * 
+ * Classes are blueprints for creating objects that encapsulate data and behavior.
+ * PHP's OOP features enable code reusability, maintainability, and scalability.
+ * 
+ * Key concepts:
+ * - Classes & Objects: Blueprints and instances
+ * - Properties & Methods: Data and behavior
+ * - Constructor: Initialize object state (__construct)
+ * - Property Promotion: PHP 8.0+ shorthand for declaring properties
+ * - Visibility: public, private, protected
+ * - Inheritance: Extending classes (extends)
+ * - Polymorphism: Method overriding and type substitution
+ * - Encapsulation: Controlling access to data
+ * - Static: Class-level properties and methods
+ * - Interfaces: Contracts for implementation
+ * - Abstract Classes: Partial implementations
+ * 
+ * Real-world uses: User management, payment processing, API integrations,
+ * database models, service classes, design patterns (Singleton, Factory, etc.)
+ * 
+ * Best practices: Single responsibility, dependency injection, favor composition
+ * over inheritance, program to interfaces, keep classes focused and cohesive.
  */
 
+echo "=== CLASSES & OBJECT-ORIENTED PROGRAMMING ===\n\n";
+
+// Real-world example: User account management
+echo "1. Basic Class Structure - User Account\n";
+echo str_repeat("-", 50) . "\n";
 
 class Person
 {
@@ -27,15 +53,18 @@ class Person
 }
 
 $person = new Person("John Doe", 30);
-echo $person->introduce() . "\n\n";
+echo "Creating user accounts:\n";
+echo "  " . $person->introduce() . "\n";
 
 $anotherPerson = new Person("jane smith", 25);
-echo $anotherPerson->introduce() . "\n\n";
+echo "  " . $anotherPerson->introduce() . "\n";
+echo "\nNote: Constructor automatically formats names using ucwords()\n\n";
 
-// Inheritance example
-// Inheritance allows a class to inherit properties and methods from another class
-echo "Inheritance\n";
+// Real-world example: Employee management system
+echo "2. Inheritance - Employee Management\n";
 echo str_repeat("-", 50) . "\n";
+
+// Inheritance allows a class to inherit properties and methods from another class
 class Employee extends Person
 {
     public function __construct(public Person $person, public string $position)
@@ -50,28 +79,34 @@ class Employee extends Person
 }
 
 $worker = new Employee($person, "Software Developer");
-echo $worker->introduce() . "\n\n";
+echo "Employee System:\n";
+echo "  " . $worker->introduce() . "\n";
 
 $anotherWorker = new Employee($anotherPerson, "Designer");
-echo $anotherWorker->introduce() . "\n\n";
+echo "  " . $anotherWorker->introduce() . "\n";
+echo "\nEmployee class extends Person, adding position information\n\n";
 
-// Polymorphism example
+// Real-world example: Polymorphic behavior
+echo "3. Polymorphism - Dynamic Method Behavior\n";
+echo str_repeat("-", 50) . "\n";
+
 // Polymorphism allows methods to do different things based on the object it is acting upon
 // Here, both Person and Employee have an introduce() method, but they behave differently
-echo "Polymorphism\n";
-echo str_repeat("-", 50) . "\n";
 function displayIntroduction(Person $individual): void
 {
-    echo $individual->introduce() . "\n";
+    echo "  " . $individual->introduce() . "\n";
 }
 
+echo "Same function, different behavior:\n";
 displayIntroduction($person);
 displayIntroduction($worker);
+echo "\nThe function accepts Person type, but works with Employee too (polymorphism)\n\n";
 
-// Encapsulation example
-// Encapsulation restricts direct access to some of an object's components
-echo "\nEncapsulation\n";
+// Real-world example: Banking system with encapsulation
+echo "4. Encapsulation - Bank Account Security\n";
 echo str_repeat("-", 50) . "\n";
+
+// Encapsulation restricts direct access to some of an object's components
 
 class BankAccount
 {
@@ -105,16 +140,23 @@ class BankAccount
 }
 
 $account = new BankAccount(100);
-echo "Initial balance: $" . $account->getBalance() . "\n";
-$account->deposit(50);
-echo "Deposited $50, new balance: $" . $account->getBalance() . "\n";
-$account->withdraw(30);
-echo "Withdrawed $30, new balance: $" . $account->getBalance() . "\n";
-$account->withdraw(150);
-echo "Attempted to withdraw $150, balance remains: $" . $account->getBalance() . "\n";
+echo "Bank Account Transactions:\n";
+echo "  Initial balance: $" . $account->getBalance() . "\n";
 
-// Static properties and methods
-echo "\nStatic Properties and Methods\n";
+$account->deposit(50);
+echo "  Deposited $50, new balance: $" . $account->getBalance() . "\n";
+
+$account->withdraw(30);
+echo "  Withdrew $30, new balance: $" . $account->getBalance() . "\n";
+
+if (!$account->withdraw(150)) {
+    echo "  Attempted to withdraw $150 - DENIED (insufficient funds)\n";
+}
+echo "  Current balance: $" . $account->getBalance() . "\n";
+echo "\nPrivate property \$balance cannot be accessed directly (protected)\n\n";
+
+// Real-world example: Utility functions and constants
+echo "5. Static Properties & Methods - Math Utilities\n";
 echo str_repeat("-", 50) . "\n";
 
 class MathHelper
@@ -132,14 +174,14 @@ class MathHelper
     }
 }
 
-var_dump(
-    MathHelper::$pi,
-    MathHelper::calculateCircumference(5),
-    MathHelper::square(4)
-);
+echo "Math Utility Functions (no instance needed):\n";
+echo "  PI constant: " . MathHelper::$pi . "\n";
+echo "  Circumference of circle (r=5): " . MathHelper::calculateCircumference(5) . "\n";
+echo "  Square of 4: " . MathHelper::square(4) . "\n";
+echo "\nStatic members accessed via class name, not object instance\n\n";
 
-// Singleton Pattern with static method
-echo "\nSingleton Pattern\n";
+// Real-world example: Database connection singleton
+echo "6. Singleton Pattern - Database Connection\n";
 echo str_repeat("-", 50) . "\n";
 
 class Connection
@@ -184,12 +226,13 @@ class Dog extends Animal
 {
 }
 
-echo Dog::type();     // Dog
-echo "\n";
-echo Dog::whoSelf() . "\n";  // Animal
+echo "Understanding static:: vs self::\n";
+echo "  Dog::type() returns: " . Dog::type() . " (uses static:: - late binding)\n";
+echo "  Dog::whoSelf() returns: " . Dog::whoSelf() . " (uses self:: - early binding)\n";
+echo "\nstatic:: resolves to calling class, self:: resolves to defining class\n\n";
 
-// Interfaces
-echo "\nInterfaces and Abstract Classes\n";
+// Real-world example: Payment processing system
+echo "8. Interfaces & Abstract Classes - Payment Gateway\n";
 echo str_repeat("-", 50) . "\n";
 
 interface PaymentProcessor
@@ -269,42 +312,48 @@ class PaypalProcessor extends OnlinePaymentProcessor
     }
 }
 
-// Extend directly from interface. Due to API_KEY is not required for cash
+// Extend directly from interface (API_KEY not required for cash payments)
 class CashProcessor implements PaymentProcessor
 {
     public function processPayment(float $amount): bool
     {
+        echo "Processing \${$amount} cash payment.\n";
         return true;
     }
 
     public function refundPayment(float $amount): bool
     {
+        echo "Refunding \${$amount} cash payment.\n";
         return true;
     }
 }
 
-// Composition pattern to use different payment processors
+// Composition pattern: OrderProcessor uses any PaymentProcessor implementation
 class OrderProcessor
 {
     public function __construct(private PaymentProcessor $paymentProcessor)
     {}
 
-    public function processOrder(float $amount): void {
+    public function processOrder(float $amount): void
+    {
         if ($this->paymentProcessor->processPayment($amount)) {
-            echo "Order processed successfully.\n";
+            echo "  Order processed successfully.\n";
         } else {
-            echo "Order processing failed.\n";
+            echo "  Order processing failed.\n";
         }
     }
 
-    public function refundOrder(float $amount): void{
+    public function refundOrder(float $amount): void
+    {
         if ($this->paymentProcessor->refundPayment($amount)) {
-            echo "Order refunded successfully.\n";
+            echo "  Order refunded successfully.\n";
         } else {
-            echo "Order refund failed.\n";
+            echo "  Order refund failed.\n";
         }
     }
 }
+
+echo "\nDemonstrating different payment processors:\n\n";
 
 $stripeProcessor = new StripeProcessor("sk_test_123456");
 $paypalProcessor = new PaypalProcessor("valid_32_character_api_key_12345");
@@ -314,11 +363,17 @@ $stripeOrder = new OrderProcessor($stripeProcessor);
 $paypalOrder = new OrderProcessor($paypalProcessor);
 $cashOrder = new OrderProcessor($cashProcessor);
 
+echo "Stripe Payment Gateway:\n";
 $stripeOrder->processOrder(100);
 $stripeOrder->refundOrder(50);
 
+echo "\nPayPal Payment Gateway:\n";
 $paypalOrder->processOrder(150.12);
 $paypalOrder->refundOrder(75.06);
 
+echo "\nCash Payment:\n";
 $cashOrder->processOrder(200);
 $cashOrder->refundOrder(100);
+
+echo "\nInterface defines contract, abstract class provides shared logic,\n";
+echo "concrete classes implement specific payment gateway behavior.\n";
