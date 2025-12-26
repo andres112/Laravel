@@ -5,20 +5,23 @@
  */
 
 
-class Person {
+class Person
+{
     // Using property promotion to declare and initialize properties
     // public string $name;
     // public int $age;
 
-    public function __construct(public string $name, public int $age) {
+    public function __construct(public string $name, public int $age)
+    {
         // Use property promotion (PHP 8.0+) instead of manual assignments
         // $this->name = $name;
         // $this->age = $age;
-        
+
         $this->name = ucwords($name);
     }
 
-    public function introduce(): string {
+    public function introduce(): string
+    {
         return "Hello, my name is {$this->name} and I am {$this->age} years old.";
     }
 }
@@ -33,12 +36,15 @@ echo $anotherPerson->introduce() . "\n\n";
 // Inheritance allows a class to inherit properties and methods from another class
 echo "Inheritance\n";
 echo str_repeat("-", 50) . "\n";
-class Employee extends Person {
-    public function __construct(public Person $person, public string $position) {
+class Employee extends Person
+{
+    public function __construct(public Person $person, public string $position)
+    {
         parent::__construct($person->name, $person->age);
     }
 
-    public function introduce(): string {
+    public function introduce(): string
+    {
         return parent::introduce() . " I work as a {$this->position}.";
     }
 }
@@ -54,7 +60,8 @@ echo $anotherWorker->introduce() . "\n\n";
 // Here, both Person and Employee have an introduce() method, but they behave differently
 echo "Polymorphism\n";
 echo str_repeat("-", 50) . "\n";
-function displayIntroduction(Person $individual): void {
+function displayIntroduction(Person $individual): void
+{
     echo $individual->introduce() . "\n";
 }
 
@@ -66,20 +73,24 @@ displayIntroduction($worker);
 echo "\nEncapsulation\n";
 echo str_repeat("-", 50) . "\n";
 
-class BankAccount {
+class BankAccount
+{
     private float $balance;
 
-    public function __construct(float $initialBalance = 0) {
+    public function __construct(float $initialBalance = 0)
+    {
         $this->balance = $initialBalance;
     }
 
-    public function deposit(float $amount): void {
+    public function deposit(float $amount): void
+    {
         if ($amount > 0) {
             $this->balance += $amount;
         }
     }
 
-    public function withdraw(float $amount): bool {
+    public function withdraw(float $amount): bool
+    {
         if ($amount > 0 && $amount <= $this->balance) {
             $this->balance -= $amount;
             return true;
@@ -87,7 +98,8 @@ class BankAccount {
         return false;
     }
 
-    public function getBalance(): float {
+    public function getBalance(): float
+    {
         return $this->balance;
     }
 }
@@ -105,14 +117,17 @@ echo "Attempted to withdraw $150, balance remains: $" . $account->getBalance() .
 echo "\nStatic Properties and Methods\n";
 echo str_repeat("-", 50) . "\n";
 
-class MathHelper {
+class MathHelper
+{
     public static float $pi = 3.14159;
 
-    public static function calculateCircumference(float $radius): float {
+    public static function calculateCircumference(float $radius): float
+    {
         return 2 * self::$pi * $radius;
     }
 
-    public static function square(float $number): float {
+    public static function square(float $number): float
+    {
         return $number * $number;
     }
 }
@@ -127,11 +142,15 @@ var_dump(
 echo "\nSingleton Pattern\n";
 echo str_repeat("-", 50) . "\n";
 
-class Connection {
+class Connection
+{
     private static ?Connection $instance = null;
     // Private constructor to prevent direct instantiation
-    private function __construct() { }
-    public static function singleton(): Connection {
+    private function __construct()
+    {
+    }
+    public static function singleton(): Connection
+    {
         /**
          * static:: means “use the class that invoked the method,”
          * self:: means “use the class where this code is defined.”
@@ -161,50 +180,51 @@ class Animal
     }
 }
 
-class Dog extends Animal {}
+class Dog extends Animal
+{
+}
 
 echo Dog::type();     // Dog
 echo "\n";
-echo Dog::whoSelf()."\n";  // Animal
+echo Dog::whoSelf() . "\n";  // Animal
 
 // Interfaces
-echo "\nInterfaces\n";
+echo "\nInterfaces and Abstract Classes\n";
 echo str_repeat("-", 50) . "\n";
 
-interface PaymentProcessor {
+interface PaymentProcessor
+{
     public function processPayment(float $amount): bool;
     public function refundPayment(float $amount): bool;
 }
 
 // Abstract class implementing the interface for common functionality
-abstract class OnlinePaymentProcessor implements PaymentProcessor {
-    // This abstract class can provide common functionality for online payment processors
-    abstract public function processPayment(float $amount): bool;
-    abstract public function refundPayment(float $amount): bool;
+abstract class OnlinePaymentProcessor implements PaymentProcessor
+{
+    public function __construct(
+        protected string $apiKey,
+    ) {
+    }
+
+    public function processPayment(float $amount): bool
+    {
+        // Common processing logic can go here
+        return true;
+    }
+
+    public function refundPayment(float $amount): bool
+    {
+        return true;
+    }
 }
 
 // Implement interface
-class StripeProcessor implements PaymentProcessor {
-    // Implementing the methods defined in the PaymentProcessor interface
-    public function processPayment(float $amount): bool {
-        echo "Processing payment of $$amount with Stripe.\n";
-        return true;
-    }
-    public function refundPayment(float $amount): bool {
-        echo "Refunding payment of $$amount with Stripe.\n";
-        return true;
-    }
+class StripeProcessor extends OnlinePaymentProcessor
+{
+
 }
 
 // Extend from abstract class
-class PaypalProcessor extends OnlinePaymentProcessor {
-    public function processPayment(float $amount): bool {
-        echo "Processing payment of $$amount with PayPal.\n";
-        return true;
-    }
-
-    public function refundPayment(float $amount): bool {
-        echo "Refunding payment of $$amount with PayPal.\n";
-        return true;
-    }
+class PaypalProcessor extends OnlinePaymentProcessor
+{
 }
