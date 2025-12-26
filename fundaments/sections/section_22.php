@@ -377,3 +377,30 @@ $cashOrder->refundOrder(100);
 
 echo "\nInterface defines contract, abstract class provides shared logic,\n";
 echo "concrete classes implement specific payment gateway behavior.\n";
+
+// Traits
+echo "\n9. Traits - Reusable Functionality\n";
+echo str_repeat("-", 50) . "\n";
+
+interface Logger {
+    public function log(string $message): void;
+}
+
+trait Loggable {
+    public function log(string $message): void {
+        echo "[LOG]: " . $message . "\n";
+    }
+}
+
+// The use of the interface isn't mandatory but force to implement the log method through the trait
+class User implements Logger {
+    use Loggable;
+    public function __construct(public string $username) {}
+
+    public function save(): void {
+        $this->log("Saving user: {$this->username}");
+    }
+}
+
+$user = new User("alice");
+$user->save();
