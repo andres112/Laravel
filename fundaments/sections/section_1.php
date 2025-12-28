@@ -155,3 +155,20 @@ var_dump($mixedData);
 
 echo "\n💡 Best Practice: Always use strict comparison (===) when checking values\n";
 echo "   to avoid unexpected type coercion bugs.\n";
+
+// Enums in PHP 8.1+
+echo "\n7. Enums in PHP 8.1+\n";
+
+enum DaysOfWeek: string
+{
+    case Monday = 'Monday';
+    case Tuesday = 'Tuesday';
+    case Wednesday = 'Wednesday';
+    case Thursday = 'Thursday';
+    case Friday = 'Friday';
+    case Saturday = 'Saturday';
+    case Sunday = 'Sunday';
+}
+
+$today = DaysOfWeek::Friday;
+echo "Today is: " . $today->value . "\n";
