@@ -5,7 +5,7 @@
 
 # Initialize laravel project
 # ========================
-# docker exec -it laravel-tasklist bash
+# docker exec -u www-data -it laravel-tasklist bash
 # composer create-project laravel/laravel .
 # php artisan key:generate
 
