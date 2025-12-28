@@ -376,31 +376,167 @@ $cashOrder->processOrder(200);
 $cashOrder->refundOrder(100);
 
 echo "\nInterface defines contract, abstract class provides shared logic,\n";
-echo "concrete classes implement specific payment gateway behavior.\n";
+echo "concrete classes implement specific payment gateway behavior.\n\n";
 
-// Traits
-echo "\n9. Traits - Reusable Functionality\n";
+// Real-world example: Reusable functionality with traits
+echo "9. Traits - Code Reuse Without Inheritance\n";
 echo str_repeat("-", 50) . "\n";
 
-interface Logger {
+interface Logger
+{
     public function log(string $message): void;
 }
 
-trait Loggable {
-    public function log(string $message): void {
-        echo "[LOG]: " . $message . "\n";
+trait Loggable
+{
+    public function log(string $message): void
+    {
+        echo "  [LOG " . date('H:i:s') . "]: " . $message . "\n";
     }
 }
 
-// The use of the interface isn't mandatory but force to implement the log method through the trait
-class User implements Logger {
-    use Loggable;
-    public function __construct(public string $username) {}
+trait Timestampable
+{
+    protected readonly string $createdAt;
+    
+    public function setTimestamp(): void
+    {
+        $this->createdAt = date('Y-m-d H:i:s');
+    }
+    
+    public function getCreatedAt(): string
+    {
+        return $this->createdAt ?? 'Not set';
+    }
+}
 
-    public function save(): void {
+// Class using multiple traits
+class User implements Logger
+{
+    use Loggable, Timestampable;
+    
+    public function __construct(public string $username)
+    {
+        $this->setTimestamp();
+    }
+
+    public function save(): void
+    {
         $this->log("Saving user: {$this->username}");
+        echo "  User created at: {$this->getCreatedAt()}\n";
     }
 }
 
+echo "Demonstrating traits for reusable functionality:\n";
 $user = new User("alice");
 $user->save();
+
+echo "\nTraits allow horizontal code reuse across unrelated classes\n\n";
+
+// Real-world example: Preventing inheritance for security and integrity
+echo "10. Final Classes - Preventing Inheritance\n";
+echo str_repeat("-", 50) . "\n";
+
+/**
+ * Value Object: Money
+ * 
+ * This class is marked as 'final' because:
+ * 1. It represents a value object that should maintain integrity
+ * 2. Any modification should create a new instance (immutability)
+ * 3. Inheritance could break the mathematical operations logic
+ * 4. Security: prevents malicious extensions that could manipulate amounts
+ */
+final class Money
+{
+    public function __construct(
+        private float $amount,
+        private string $currency
+    ) {
+        if ($amount < 0) {
+            throw new Exception("Amount cannot be negative");
+        }
+    }
+    
+    public function add(Money $other): Money
+    {
+        if ($this->currency !== $other->currency) {
+            throw new Exception("Cannot add different currencies");
+        }
+        return new Money($this->amount + $other->amount, $this->currency);
+    }
+    
+    public function format(): string
+    {
+        return number_format($this->amount, 2) . ' ' . $this->currency;
+    }
+}
+
+echo "Money value object (final class):\n";
+$price = new Money(100.50, 'USD');
+$tax = new Money(15.00, 'USD');
+$total = $price->add($tax);
+
+echo "  Price: " . $price->format() . "\n";
+echo "  Tax: " . $tax->format() . "\n";
+echo "  Total: " . $total->format() . "\n";
+
+// This would cause an error if uncommented:
+// class CustomMoney extends Money {} // Fatal error: Class CustomMoney may not inherit from final class Money
+
+echo "\n✓ Final class prevents inheritance, ensuring Money's logic remains intact\n";
+echo "  This protects against breaking changes and security vulnerabilities\n\n";
+
+// Real-world example: Final methods
+echo "11. Final Methods - Preventing Method Override\n";
+echo str_repeat("-", 50) . "\n";
+
+/**
+ * Base authentication class with critical security method
+ */
+class Authentication
+{
+    protected array $sessions = [];
+    
+    // This method is final - cannot be overridden in child classes
+    final public function validateToken(string $token): bool
+    {
+        // Critical security logic that must not be altered
+        echo "  [SECURITY] Validating token: " . substr($token, 0, 8) . "...\n";
+        return hash('sha256', $token) === hash('sha256', 'secret_token_123');
+    }
+    
+    // This method can be overridden
+    public function login(string $username): string
+    {
+        $token = bin2hex(random_bytes(16));
+        $this->sessions[$username] = $token;
+        return $token;
+    }
+}
+
+class OAuth2Authentication extends Authentication
+{
+    // We can override login method
+    public function login(string $username): string
+    {
+        echo "  [OAuth2] Enhanced login for: $username\n";
+        return parent::login($username);
+    }
+    
+    // But we CANNOT override validateToken() - it's final
+    // Uncommenting this would cause an error:
+    // public function validateToken(string $token): bool {
+    //     return true; // Fatal error: Cannot override final method
+    // }
+}
+
+echo "Authentication with final methods:\n";
+$auth = new OAuth2Authentication();
+$token = $auth->login("john_doe");
+echo "  Generated token: " . substr($token, 0, 16) . "...\n";
+
+$isValid = $auth->validateToken("secret_token_123");
+echo "  Token validation: " . ($isValid ? "✓ Valid" : "✗ Invalid") . "\n";
+
+echo "\n✓ Final method validateToken() cannot be overridden in child classes\n";
+echo "  This ensures critical security logic remains unchanged\n";
