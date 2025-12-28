@@ -540,3 +540,29 @@ echo "  Token validation: " . ($isValid ? "✓ Valid" : "✗ Invalid") . "\n";
 
 echo "\n✓ Final method validateToken() cannot be overridden in child classes\n";
 echo "  This ensures critical security logic remains unchanged\n";
+
+
+final class PaymentProcessor
+{
+    public function pay(): void
+    {
+        echo "Processing payment";
+    }
+}
+
+// ❌ Not allowed
+// class StripeProcessor extends PaymentProcessor {}
+
+class BaseService
+{
+    final public function execute(): void
+    {
+        echo "Fixed execution flow";
+    }
+}
+
+class CustomService extends BaseService
+{
+    // ❌ Not allowed
+    // public function execute() {}
+}
