@@ -14,9 +14,8 @@ Route::get('/tasks/{task}', function ($task) {
 })->name('tasks.show');
 
 // Redirect route example
-Route::get('/old-home', function () {
-    return redirect()->route('home');
-})->name('old.home');
+Route::permanentRedirect('/old-home', '/')->name('old.home');
+Route::redirect('/temp-home', '/', 302)->name('temp.home');
 
 // Display all registered routes
 Route::get('/show-routes', function () {
