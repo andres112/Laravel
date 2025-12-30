@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index', [
+        'title' => 'Home Page',
+        'country' => 'Switzerland',
+    ]);
 })->name('home');
 
 // Dynamic route for listing tasks
