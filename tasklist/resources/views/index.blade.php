@@ -5,6 +5,8 @@
     @if(request()->has('code'))
         <img src="https://flagcdn.com/{{ strtolower(request('code')) }}.svg" alt="{{ strtoupper(request('code')) }} Flag" width="300">
     @else
-    Country: {{ $country }}
+        @isset($country)
+        Country: {{ $country }}
+        @endisset
     @endif
 </h2>
