@@ -1,13 +1,65 @@
 
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
-Route::get('/', function () {
+class Task
+{
+    public function __construct(
+        public int $id,
+        public string $title,
+        public string $description,
+        public ?string $long_description,
+        public bool $completed,
+        public Carbon $created_at,
+        public Carbon $updated_at
+    ) {
+    }
+}
+
+$tasks = [
+    new Task(
+        1,
+        'Buy groceries',
+        'Task 1 description',
+        'Task 1 long description',
+        false,
+        Carbon::parse('2026-03-01 12:00:00'),
+        Carbon::parse('2026-03-01 12:00:00')
+    ),
+    new Task(
+        2,
+        'Sell old stuff',
+        'Task 2 description',
+        null,
+        false,
+        Carbon::parse('2026-03-02 12:00:00'),
+        Carbon::parse('2026-03-02 12:00:00')
+    ),
+    new Task(
+        3,
+        'Learn programming',
+        'Task 3 description',
+        'Task 3 long description',
+        true,
+        Carbon::parse('2026-03-03 12:00:00'),
+        Carbon::parse('2026-03-03 12:00:00')
+    ),
+    new Task(
+        4,
+        'Take dogs for a walk',
+        'Task 4 description',
+        null,
+        false,
+        Carbon::parse('2026-03-04 12:00:00'),
+        Carbon::parse('2026-03-04 12:00:00')
+    ),
+];
+
+Route::get('/', function () use ($tasks) {
     return view('index', [
-        'title' => 'Home Page',
-        'country' => 'Switzerland',
+        'tasks' => $tasks,
     ]);
 })->name('home');
 
