@@ -5,7 +5,7 @@
 <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
     <strong>Debug Info:</strong><br>
     Tasks variable exists: {{ isset($tasks) ? 'YES' : 'NO' }}<br>
-    @if(isset($tasks))
+    @if (isset($tasks))
         Tasks count: {{ count($tasks) }}<br>
         Tasks type: {{ gettype($tasks) }}<br>
     @endif
@@ -16,7 +16,9 @@
     <ul>
         @forelse ($tasks as $task)
             <li>
-                <strong> <a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a></strong> - Last Edited: {{ $task->updated_at->format('Y-m-d H:i:s') }}
+                <strong> <a href="{{ route('tasks.show', ['taskId' => $task->id]) }}">{{ $task->title }}</a></strong> -
+                Last Edited:
+                {{ $task->updated_at->format('Y-m-d H:i:s') }}
             </li>
         @empty
             <li>No tasks available.</li>
@@ -24,14 +26,14 @@
     </ul>
 </div>
 
-{{-- <h2 style="display: inline-flex; gap: 1rem; align-items: center;">
-    @if(request()->has('code'))
-        <img src="https://flagcdn.com/{{ strtolower(request('code')) }}.svg" alt="{{ strtoupper(request('code')) }} Flag" width="300">
-    @else
+{{-- Country flag, just for studying purposes: --}}
+@if (request()->has('code'))
+    <h2 style="display: inline-flex; gap: 1rem; align-items: center;">
+        <img src="https://flagcdn.com/{{ strtolower(request('code')) }}.svg" alt="{{ strtoupper(request('code')) }} Flag"
+            width="300">
+        {{-- @else
         @isset($country)
         Country: {{ $country }}
-        @endisset
-    @endif
-</h2> --}}
-
-
+        @endisset --}}
+    </h2>
+@endif

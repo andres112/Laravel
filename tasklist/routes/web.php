@@ -61,12 +61,16 @@ Route::get('/', function () use ($tasks) {
     return view('index', [
         'tasks' => $tasks,
     ]);
-})->name('home');
+})->name('tasks.index');
 
 // Dynamic route for listing tasks
-Route::get('/tasks/{task}', function ($task) {
-    return "Displaying task: " . $task;
+Route::get('/tasks/{taskId}', function ($taskId) use ($tasks) {
+    return "Displaying task: " . $taskId ."<br><a href='" . route('tasks.index') . "'>Back to task list</a>";
 })->name('tasks.show');
+
+
+
+
 
 // Redirect route example
 Route::permanentRedirect('/old-home', '/')->name('old.home');
