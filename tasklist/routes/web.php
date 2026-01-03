@@ -1,6 +1,7 @@
 
 <?php
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 
@@ -70,7 +71,14 @@ Route::get('/tasks', function () use ($tasks) {
 
 // Dynamic route for listing tasks
 Route::get('/tasks/{taskId}', function ($taskId) use ($tasks) {
-    return "Displaying task: " . $taskId ."<br><a href='" . route('tasks.index') . "'>Back to task list</a>";
+    $task = collect($tasks)->firstWhere('id', (int) $taskId);
+    if (! $task) {
+        abort(Response::HTTP_NOT_FOUND, 'Task not found');
+    }
+    return view('show', [
+        'task' => $task,
+    ]);
+    // return "Displaying task: " . $taskId ."<br><a href='" . route('tasks.index') . "'>Back to task list</a>";
 })->name('tasks.show');
 
 
@@ -79,7 +87,7 @@ Route::get('/tasks/{taskId}', function ($taskId) use ($tasks) {
 
 // Redirect route example
 Route::permanentRedirect('/old-home', '/')->name('old.home');
-Route::redirect('/temp-home', '/', 302)->name('temp.home');
+Route::redirect('/temp-home', '/', Response::HTTP_TEMPORARY_REDIRECT)->name('temp.home');
 
 // Display all registered routes
 Route::get('/show-routes', function () {
@@ -92,10 +100,10 @@ Route::get('/show-routes', function () {
         ];
     });
 
-    return response()->json($routes, 200, [], JSON_PRETTY_PRINT);
+    return response()->json($routes, Response::HTTP_OK, [], JSON_PRETTY_PRINT);
 })->name('artisan.routes');
 
 // Fallback route for undefined URLs
 Route::fallback(function () {
-    return response('Page not found', 404);
+    return response('Page not found', Response::HTTP_NOT_FOUND);
 })->name('fallback');
