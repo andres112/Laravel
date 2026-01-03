@@ -22,39 +22,75 @@ class Task
 $tasks = [
     new Task(
         1,
-        'Buy groceries',
-        'Task 1 description',
-        'Task 1 long description',
+        'Buy groceries for the week',
+        'Purchase milk, eggs, bread, and vegetables from the supermarket.',
+        'Remember to check for discounts and bring reusable bags.',
         false,
-        Carbon::parse('2026-03-01 12:00:00'),
-        Carbon::parse('2026-03-01 12:00:00')
+        Carbon::parse('2025-12-28 17:30:00'),
+        Carbon::parse('2025-12-28 17:30:00')
     ),
     new Task(
         2,
-        'Sell old stuff',
-        'Task 2 description',
-        null,
-        false,
-        Carbon::parse('2026-03-02 12:00:00'),
-        Carbon::parse('2026-03-02 12:00:00')
+        'Finish project report',
+        'Complete the final draft of the annual project report.',
+        'Include the latest sales figures and team feedback. Submit to manager by email.',
+        true,
+        Carbon::parse('2025-12-20 09:00:00'),
+        Carbon::parse('2025-12-22 15:45:00')
     ),
     new Task(
         3,
-        'Learn programming',
-        'Task 3 description',
-        'Task 3 long description',
-        true,
-        Carbon::parse('2026-03-03 12:00:00'),
-        Carbon::parse('2026-03-03 12:00:00')
+        'Call plumber',
+        'Fix the leaking kitchen faucet.',
+        null,
+        false,
+        Carbon::parse('2026-01-02 10:00:00'),
+        Carbon::parse('2026-01-02 10:00:00')
     ),
     new Task(
         4,
-        'Take dogs for a walk',
-        'Task 4 description',
+        'Read "Atomic Habits"',
+        'Read at least 50 pages of the book.',
+        'Take notes on key concepts for personal development.',
+        true,
+        Carbon::parse('2025-12-30 20:00:00'),
+        Carbon::parse('2026-01-01 21:00:00')
+    ),
+    new Task(
+        5,
+        'Renew car insurance',
+        'Check offers and renew the car insurance before expiry.',
         null,
         false,
-        Carbon::parse('2026-03-04 12:00:00'),
-        Carbon::parse('2026-03-04 12:00:00')
+        Carbon::parse('2026-01-03 08:00:00'),
+        Carbon::parse('2026-01-03 08:00:00')
+    ),
+    new Task(
+        6,
+        'Plan birthday party',
+        'Organize a birthday party for Sarah.',
+        'Book a venue, send invitations, and order a cake.',
+        false,
+        Carbon::parse('2025-12-25 12:00:00'),
+        Carbon::parse('2025-12-25 12:00:00')
+    ),
+    new Task(
+        7,
+        'Update LinkedIn profile',
+        'Add recent job experience and skills to LinkedIn.',
+        null,
+        true,
+        Carbon::parse('2025-12-15 14:00:00'),
+        Carbon::parse('2025-12-16 09:30:00')
+    ),
+    new Task(
+        8,
+        'Take dogs for a walk',
+        'Walk Max and Bella in the park for at least 30 minutes.',
+        null,
+        false,
+        Carbon::parse('2026-01-03 07:30:00'),
+        Carbon::parse('2026-01-03 07:30:00')
     ),
 ];
 

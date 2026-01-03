@@ -1,4 +1,7 @@
-version: "3.9"
+# Docker Compose configuration for Laravel Tasklist application
+#============================================================
+ # Start the application with: docker-compose up -d
+ # Stop the application with: docker-compose down
 
 services:
   app:
