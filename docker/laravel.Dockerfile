@@ -1,6 +1,7 @@
 # Laravel Dockerfile
 # =========================
 # docker build -t laravel-base -f laravel.Dockerfile .
+# Run Laravel container only, otherwise use docker-compose from each project
 # docker run -d --name laravel-tasklist -p 8080:80 -v ${pwd}/tasklist:/var/www/html laravel-base
 
 # Initialize laravel project
