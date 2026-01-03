@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  app:
+    image: laravel-base
+    container_name: tasklist-app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - postgres
+    networks:
+      - tasklist
+
+  postgres:
+    image: postgres:16
+    container_name: tasklist-postgres
+    env_file:
+      - .db.env
+    volumes:
+      - tasklist_pgdata:/var/lib/postgresql/data
+    networks:
+      - tasklist
+
+  adminer:
+    image: adminer
+    container_name: tasklist-adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - tasklist
+
+volumes:
+  tasklist_pgdata:
+
+networks:
+  tasklist:
+    driver: bridge
