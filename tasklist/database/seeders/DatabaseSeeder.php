@@ -18,6 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         // Create user without persisting to DB with make()
         User::factory(1)->make();
+        // Create 1 user persisting in DB with create()
+        User::factory(1)->create();
+        // Create 2 unverified users persisting in DB with create()
+        User::factory(2)->unverified()->create();
         // Create 20 tasks persisting in DB with create()
         Task::factory(20)->create();
 
