@@ -29,9 +29,6 @@
 
         h1 {
             color: #333;
-            border-bottom: 2px solid orange;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
         }
 
         h3 {
@@ -56,6 +53,16 @@
             gap: 20px;
         }
 
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: space-between;
+            border-bottom: 2px solid orange;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
         .task-info {
             flex: 1;
         }
@@ -77,8 +84,9 @@
             font-size: 0.85em;
         }
 
-        .btn-task,
-        .btn-back {
+        .btn-primary,
+        .btn-secondary,
+        .btn-terciary {
             display: inline-block;
             color: white;
             background-color: orange;
@@ -91,30 +99,38 @@
             white-space: nowrap;
         }
 
-        .btn-task:hover,
-        .btn-back:hover {
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .btn-terciary:hover {
             opacity: 0.8;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
         }
 
-        .btn-task.completed {
+        .btn-primary.completed {
             background-color: green;
         }
 
-        .btn-back {
+        .btn-secondary {
+            background-color: blue;
+        }
+        .btn-secondary:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 255, 0.3);
+        }
+
+        .btn-terciary {
             background-color: red;
         }
-        .btn-back:hover {
+        .btn-terciary:hover {
             box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
-    <main></main>
-    <h1>@yield('title')</h1>
-    <div>@yield('content')</div>
+    <main>
+        <div class="title-container">@yield('title')</div>
+        <div>@yield('content')</div>
     </main>
 </body>
 

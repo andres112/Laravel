@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 {{-- Create a simple Home page template in blade.php file. --}}
-@section('title', 'The list of recently edited tasks')
+@section('title')
+    <h1>The list of recently edited tasks</h1>
+    <a class="btn-secondary" href="{{ route('tasks.create') }}">New Task</a>
+@endsection
 
 {{-- Debug output --}}
 <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border: 1px solid #ccc;">
@@ -21,7 +24,7 @@
                         <p>{{ $task->description }}</p>
                         <small>Last Edited: {{ $task->updated_at->format('Y-m-d H:i:s') }}</small>
                     </div>
-                    <a class="btn-task" href="{{ route('tasks.show', ['taskId' => $task->id]) }}">View</a>
+                    <a class="btn-primary" href="{{ route('tasks.show', ['taskId' => $task->id]) }}">View</a>
                 </li>
             @empty
                 <li>No incomplete tasks available.</li>
@@ -39,7 +42,7 @@
                         <p>{{ $task->description }}</p>
                         <small>Last Edited: {{ $task->updated_at->format('Y-m-d H:i:s') }}</small>
                     </div>
-                    <a class="btn-task completed" href="{{ route('tasks.show', ['taskId' => $task->id]) }}">View</a>
+                    <a class="btn-primary completed" href="{{ route('tasks.show', ['taskId' => $task->id]) }}">View</a>
                 </li>
             @empty
                 <li>No completed tasks available.</li>

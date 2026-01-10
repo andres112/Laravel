@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
-@section('title', $task->title)
+@section('title')
+    <h1>{{ $task->title }}</h1>
+@endsection
 
 @section('content')
     {{-- Comeback button --}}
-    <a class="btn-back" href="{{ route('tasks.index') }}">Back to task list</a>
+    <a class="btn-terciary" href="{{ route('tasks.index') }}">Back to task list</a>
 
     <p><strong>Description:</strong> {{ $task->description }}</p>
 

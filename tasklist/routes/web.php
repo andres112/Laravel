@@ -106,6 +106,9 @@ Route::get('/tasks', function () {
     ]);
 })->name('tasks.index');
 
+// Static route for creating a new task
+Route::view('/tasks/create', 'create')->name('tasks.create');
+
 // Dynamic route for listing tasks
 Route::get('/tasks/{taskId}', function ($taskId) {
     return view('show', [
@@ -122,8 +125,6 @@ Route::get('/tasks/{taskId}', function ($taskId) {
     // NOTE: Returning simple string for demonstration
     // return "Displaying task: " . $taskId ."<br><a href='" . route('tasks.index') . "'>Back to task list</a>";
 })->name('tasks.show');
-
-
 
 
 
