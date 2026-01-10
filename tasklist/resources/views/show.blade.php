@@ -2,7 +2,7 @@
 
 @section('title')
     <h1>
-        <span style="margin-right: 1rem;">
+        <span style="margin-right: 0.5rem;">
             @if ($task->completed)
                 ✅
             @else
