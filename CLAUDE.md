@@ -29,59 +29,21 @@ Laravel/
 - **Docker Desktop** (Windows): [Download](https://www.docker.com/products/docker-desktop/)
 - **Visual Studio Code** (recommended)
 
-## Docker Setup
+## Testing workflows
 
-### PHP Fundamentals Container
+### Tasklist Project
+Constrains:
+- Just execute the steps
+- Not verbose
+- Not explain
+- Report only after the full test is done
 
-Build:
-```sh
-docker build -t php-apache -f fundaments.Dockerfile .
-```
+Use playwright to test the following:
 
-Run:
-```sh
-docker run -d --name php-training -p 8080:80 -v ${PWD}/fundaments:/var/www/html php-apache
-```
-
-Access: `http://localhost:8080`
-
-### Laravel Container (tasklist)
-
-Build:
-```sh
-docker build -t laravel-base -f laravel.Dockerfile .
-```
-
-Run:
-```sh
-docker run -d --name laravel-tasklist -p 8080:80 -v ${PWD}/tasklist:/var/www/html laravel-base
-```
-
-Initialize Laravel (first time):
-```sh
-docker exec -u www-data -it laravel-tasklist bash
-composer create-project laravel/laravel .
-php artisan key:generate
-```
-
-Access: `http://localhost:8080`
-
-## Container Management
-
-Stop container:
-```sh
-docker stop php-training         # Fundamentals
-docker stop laravel-tasklist     # Laravel
-```
-
-Remove container:
-```sh
-docker rm php-training           # Fundamentals
-docker rm laravel-tasklist       # Laravel
-```
-
-Access container shell:
-```sh
-docker exec -it php-training bash              # Fundamentals
-docker exec -u www-data -it laravel-tasklist bash  # Laravel
-```
+Use as base url: http://localhost:8080.
+1. / redirects to http://localhost:8080/tasks.
+2. old-home redirects to / and then to /tasks.
+3. Already in the /tasks check that the pending tasks are first and the completed after. Completed tasks with green view buttons and the pending with orange view buttons.
+4. Click in the 3rd pending task view button. Then check that the title has 🔄 icon in the title.
+5. come back to the tasks using the red button.
+6. Scroll to the bottom of the page and click on the last completed task view button. Then check that the title has ✅ icon in the title.
