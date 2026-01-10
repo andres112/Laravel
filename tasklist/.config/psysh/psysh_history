@@ -1,6 +1,0 @@
-App\Models\Task::find(2)
-App\Models\Task::all()=>where('completed', false)
-App\Models\Task::where('completed', false)
-App\Models\Task::where('completed', false)->get()
-eit
-exit
