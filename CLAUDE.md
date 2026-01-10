@@ -1,13 +1,17 @@
 # Laravel & PHP Learning Repository
 
-This repository is for learning PHP and Laravel. It uses Docker for development environments.
+This repository contains training materials for learning PHP and Laravel using Docker environments.
+
+## Current Focus
+
+**tasklist/** - Laravel task management application
 
 ## Directory Structure
 
 ```
 Laravel/
 ├── fundaments/          # PHP fundamentals learning
-│   ├── sections/        # Step-by-step PHP lessons
+│   ├── sections/        # Step-by-step lessons
 │   ├── require/         # Configuration files
 │   ├── index.php        # Main entry point
 │   ├── checker.php      # Type checking examples
@@ -17,20 +21,67 @@ Laravel/
 ├── docker/              # Docker configurations
 │   ├── fundaments.Dockerfile   # PHP/Apache for fundamentals
 │   └── laravel.Dockerfile      # Laravel environment
-└── tasklist/            # Laravel project - Task management app
+└── tasklist/            # Laravel task management app
 ```
 
-## Projects
+## Prerequisites
 
-### PHP Fundamentals (`fundaments/`)
-Basic PHP learning exercises covering types, strict mode, performance, and file handling.
+- **Docker Desktop** (Windows): [Download](https://www.docker.com/products/docker-desktop/)
+- **Visual Studio Code** (recommended)
 
-### Laravel Projects
-- **tasklist/** - Task management application (Laravel)
+## Docker Setup
 
-## Development
+### PHP Fundamentals Container
 
-All projects run in Docker containers. See README.md for setup instructions.
+Build:
+```sh
+docker build -t php-apache -f fundaments.Dockerfile .
+```
 
-- PHP Fundamentals: `http://localhost:8080` (php-training container)
-- Laravel Projects: `http://localhost:8080` (laravel-tasklist container)
+Run:
+```sh
+docker run -d --name php-training -p 8080:80 -v ${PWD}/fundaments:/var/www/html php-apache
+```
+
+Access: `http://localhost:8080`
+
+### Laravel Container (tasklist)
+
+Build:
+```sh
+docker build -t laravel-base -f laravel.Dockerfile .
+```
+
+Run:
+```sh
+docker run -d --name laravel-tasklist -p 8080:80 -v ${PWD}/tasklist:/var/www/html laravel-base
+```
+
+Initialize Laravel (first time):
+```sh
+docker exec -u www-data -it laravel-tasklist bash
+composer create-project laravel/laravel .
+php artisan key:generate
+```
+
+Access: `http://localhost:8080`
+
+## Container Management
+
+Stop container:
+```sh
+docker stop php-training         # Fundamentals
+docker stop laravel-tasklist     # Laravel
+```
+
+Remove container:
+```sh
+docker rm php-training           # Fundamentals
+docker rm laravel-tasklist       # Laravel
+```
+
+Access container shell:
+```sh
+docker exec -it php-training bash              # Fundamentals
+docker exec -u www-data -it laravel-tasklist bash  # Laravel
+```
