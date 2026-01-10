@@ -98,6 +98,10 @@
             box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
         }
 
+        .btn-task.completed {
+            background-color: green;
+        }
+
         .btn-back {
             background-color: red;
         }
