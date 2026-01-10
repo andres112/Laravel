@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('title')
-    <h1>{{ $task->title }}</h1>
+    <h1>
+        <span style="margin-right: 1rem;">
+            @if ($task->completed)
+                ✅
+            @else
+                🔄
+            @endif
+        </span>
+        {{ $task->title }}
+    </h1>
 @endsection
 
 @section('content')
