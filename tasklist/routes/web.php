@@ -108,7 +108,7 @@ Route::get('/tasks', function () {
 // Dynamic route for listing tasks
 Route::get('/tasks/{taskId}', function ($taskId) {
     return view('show', [
-        'task' => Task::find($taskId)
+        'task' => Task::findOrFail($taskId),
     ]);
     // NOTE: Returnig dummy data from above array instead of DB
     // $task = collect($tasks)->firstWhere('id', (int) $taskId);

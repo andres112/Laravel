@@ -77,7 +77,8 @@
             font-size: 0.85em;
         }
 
-        .btn-task {
+        .btn-task,
+        .btn-back {
             display: inline-block;
             color: white;
             background-color: orange;
@@ -90,10 +91,18 @@
             white-space: nowrap;
         }
 
-        .btn-task:hover {
-            opacity: 0.5;
+        .btn-task:hover,
+        .btn-back:hover {
+            opacity: 0.8;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(255, 165, 0, 0.3);
+        }
+
+        .btn-back {
+            background-color: red;
+        }
+        .btn-back:hover {
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
         }
     </style>
 </head>

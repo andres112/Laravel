@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Comeback button --}}
-    <a href="{{ route('tasks.index') }}">Back to task list</a>
+    <a class="btn-back" href="{{ route('tasks.index') }}">Back to task list</a>
 
     <p><strong>Description:</strong> {{ $task->description }}</p>
 
