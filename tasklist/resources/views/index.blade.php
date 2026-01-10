@@ -12,7 +12,7 @@
 
 @section('content')
     <div>
-        <h3>Incomplete Tasks:</h3>
+        <h3>Incomplete Tasks: {{ isset($incompleteTasks) ? count($incompleteTasks) : 'N/A' }}</h3>
         <ul>
             @forelse ($incompleteTasks as $task)
                 <li>
@@ -30,7 +30,7 @@
     </div>
 
     <div>
-        <h3>Completed Tasks:</h3>
+        <h3>Completed Tasks: {{ isset($completedTasks) ? count($completedTasks) : 'N/A' }}</h3>
         <ul>
             @forelse ($completedTasks as $task)
                 <li>
