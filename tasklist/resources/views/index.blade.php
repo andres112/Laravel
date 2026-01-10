@@ -19,9 +19,12 @@
         <ul>
             @forelse ($tasks as $task)
                 <li>
-                    <strong> <a href="{{ route('tasks.show', ['taskId' => $task->id]) }}">{{ $task->title }}</a></strong> -
-                    Last Edited:
-                    {{ $task->updated_at->format('Y-m-d H:i:s') }}
+                    <div class="task-info">
+                        <h3>{{ $task->title }}</h3>
+                        <p>{{ $task->description }}</p>
+                        <small>Last Edited: {{ $task->updated_at->format('Y-m-d H:i:s') }}</small>
+                    </div>
+                    <a class="btn-task" href="{{ route('tasks.show', ['taskId' => $task->id]) }}">View</a>
                 </li>
             @empty
                 <li>No tasks available.</li>
