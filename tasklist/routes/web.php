@@ -129,6 +129,7 @@ Route::get('/tasks/{taskId}', function ($taskId) {
 // Post route for creating a new task
 Route::post('/tasks', function () {
     // Logic to store the new task would go here
+    dd('Task creation logic goes here.');
     return redirect()->route('tasks.index')->with('status', 'Task created successfully!');
 })->name('tasks.store');
 
