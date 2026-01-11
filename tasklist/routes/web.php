@@ -126,6 +126,12 @@ Route::get('/tasks/{taskId}', function ($taskId) {
     // return "Displaying task: " . $taskId ."<br><a href='" . route('tasks.index') . "'>Back to task list</a>";
 })->name('tasks.show');
 
+// Post route for creating a new task
+Route::post('/tasks', function () {
+    // Logic to store the new task would go here
+    return redirect()->route('tasks.index')->with('status', 'Task created successfully!');
+})->name('tasks.store');
+
 
 
 // Redirect route example
